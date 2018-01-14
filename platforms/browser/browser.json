@@ -25,9 +25,6 @@
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "be.ugent.chronicals"
     },
-    "cordova-plugin-googleplus": {
-      "PACKAGE_NAME": "be.ugent.chronicals"
-    },
     "cordova-plugin-device": {
       "PACKAGE_NAME": "be.ugent.chronicals"
     },
@@ -39,18 +36,13 @@
     },
     "cordova-plugin-mauron85-background-geolocation": {
       "PACKAGE_NAME": "be.ugent.chronicals"
+    },
+    "cordova-plugin-googleplus": {
+      "PACKAGE_NAME": "be.ugent.chronicals"
     }
   },
   "dependent_plugins": {},
   "modules": [
-    {
-      "file": "plugins/cordova-plugin-googleplus/www/GooglePlus.js",
-      "id": "cordova-plugin-googleplus.GooglePlus",
-      "pluginId": "cordova-plugin-googleplus",
-      "clobbers": [
-        "window.plugins.googleplus"
-      ]
-    },
     {
       "file": "plugins/cordova-plugin-device/www/device.js",
       "id": "cordova-plugin-device.device",
@@ -120,14 +112,22 @@
       "clobbers": [
         "backgroundGeolocation"
       ]
+    },
+    {
+      "file": "plugins/cordova-plugin-googleplus/www/GooglePlus.js",
+      "id": "cordova-plugin-googleplus.GooglePlus",
+      "pluginId": "cordova-plugin-googleplus",
+      "clobbers": [
+        "window.plugins.googleplus"
+      ]
     }
   ],
   "plugin_metadata": {
     "cordova-plugin-whitelist": "1.3.3",
-    "cordova-plugin-googleplus": "5.2.1",
     "cordova-plugin-device": "2.0.1",
     "cordova-plugin-badge": "0.8.6",
     "cordova-plugin-local-notification": "0.9.0-beta.2",
-    "cordova-plugin-mauron85-background-geolocation": "2.3.3"
+    "cordova-plugin-mauron85-background-geolocation": "2.3.3",
+    "cordova-plugin-googleplus": "5.2.1"
   }
 }
