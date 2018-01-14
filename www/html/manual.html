@@ -1,0 +1,390 @@
+<!--
+ 	Chronicals, v1.0
+ 	Created by Kiani Lannoye & Gilles Vandewiele, commissioned by UZ Ghent
+    https://github.com/kianilannoye/Chronicals
+
+    This html file is the view for adding or modifying a headache.
+-->
+
+<!doctype html>
+<html lang="en" ng-app="Chronic">
+<head>
+    <meta charset="utf-8">
+
+    <title>Handleiding</title>
+    <script src="../cordova.js"></script>
+    <!-- Our style sheet -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- AngularJS + ngStorage | MIT License | https://angularjs.org/ -->
+    <script src="../js/angular/angular.js"></script>
+    <script src="../js/angular/ngStorage.min.js"></script>
+
+    <!-- onsenui v1.3.11 | Apache License | http://onsen.io/ -->
+    <script src="../js/vendor/onsenui.min.js"></script>
+
+    <!-- jQuery | MIT License | https://jquery.org/ -->
+    <script src="../js/vendor/jquery-2.1.4.js"></script>
+
+    <!-- Main file & Headache controller -->
+    <script src="../js/controllers/chronic.js"> </script>
+    <!--/*Dataservice VOOR de controller-->
+    <script src="../js/services/backgroundservice.js"></script>
+    <script src="../js/services/dataservice.js"> </script>
+    <script src="../js/index.js"></script>
+    <script src="../js/controllers/manualController.js"> </script>
+    <script src="../js/vendor/Chart.min.js"></script>
+    <script src="../js/vendor/angular-chart.js"></script>
+
+
+
+</head>
+<body ng-controller="manualController">
+<div id="loadingImg" style="display: block;">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<ons-navigator var="myNavigator" class="hidden">
+    <!-- Intensity page -->
+    <ons-page id="manualList.html">
+
+        <ons-toolbar>
+            <div class="left"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-arrow-back" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="center" style="margin: 0 auto; text-align: center;"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-home" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="right"></div>
+        </ons-toolbar>
+
+        <div class="navigatorTab">
+            <div style="margin-bottom: 2%">
+                <h1>Handleiding</h1>
+                <p>Deze handleiding toont u de functionaliteit van deze app</p>
+            </div>
+
+            <div>
+                <ons-list style="color: white">
+                    <ons-list-header>Pagina's handleiding</ons-list-header>
+                    <!--dashboard-->
+                    <ons-list-item style="color: white" modifier="chevron" ng-click="myNavigator.pushPage('manualDashboard.html')">
+                        <div style="width: 15%; float:left">
+                            <ons-icon  icon="ion-ios-home" size="24px"></ons-icon>
+                        </div>
+                        <div style="width: 85%; float:left; font-size: 130%;">
+                            Dashboard
+                        </div>
+                    </ons-list-item>
+
+                    <!--addHeadache-->
+                    <ons-list-item style="color: white" modifier="chevron" ng-click="myNavigator.pushPage('manualAddHeadache.html')">
+                        <div style="width: 15%; float:left">
+                            <ons-icon  icon="fa fa-user-md" size="24px"></ons-icon>
+                        </div>
+                        <div style="width: 85%; float:left; font-size: 130%;">
+                            Hoofdpijn Toevoegen
+                        </div>
+                    </ons-list-item>
+
+                    <!--addMedicine-->
+                    <ons-list-item style="color: white" modifier="chevron" ng-click="myNavigator.pushPage('manualAddMedicine.html')">
+                        <div style="width: 15%; float:left">
+                            <ons-icon  icon="fa fa-medkit" size="24px"></ons-icon>
+                        </div>
+                        <div style="width: 85%; float:left; font-size: 130%;">
+                            Medicijn Toevoegen
+                        </div>
+                    </ons-list-item>
+
+                    <!--History-->
+                    <ons-list-item style="color: white" modifier="chevron" ng-click="myNavigator.pushPage('manualHistory.html')">
+                        <div style="width: 15%; float:left">
+                            <ons-icon  icon="fa fa-history" size="24px"></ons-icon>
+                        </div>
+                        <div style="width: 85%; float:left; font-size: 130%;">
+                            Geschiedenis
+                        </div>
+                    </ons-list-item>
+
+                    <!--Diary-->
+                    <ons-list-item style="color: white" modifier="chevron" ng-click="myNavigator.pushPage('manualDiary.html')">
+                        <div style="width: 15%; float:left">
+                            <ons-icon  icon="fa fa-calendar-check-o" size="24px"></ons-icon>
+                        </div>
+                        <div style="width: 85%; float:left; font-size: 130%;">
+                            Dagboek
+                        </div>
+                    </ons-list-item>
+
+                    <!--Advies-->
+                    <ons-list-item style="color: white" modifier="chevron" ng-click="myNavigator.pushPage('manualAdvies.html')">
+                        <div style="width: 15%; float:left">
+                            <ons-icon  icon="fa fa-info-circle" size="24px"></ons-icon>
+                        </div>
+                        <div style="width: 85%; float:left; font-size: 130%;">
+                            Advies
+                        </div>
+                    </ons-list-item>
+
+                    <!--Instellingen-->
+                    <ons-list-item style="color: white" modifier="chevron" ng-click="myNavigator.pushPage('manualSettings.html')">
+                        <div style="width: 15%; float:left">
+                            <ons-icon  icon="fa fa-cog" size="24px"></ons-icon>
+                        </div>
+                        <div style="width: 85%; float:left; font-size: 130%;">
+                            Instellingen
+                        </div>
+                    </ons-list-item>
+
+                </ons-list>
+
+
+
+            </div>
+        </div>
+    </ons-page>
+</ons-navigator>
+
+
+<script type="text/ons-template" id="manualDashboard.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left"><ons-toolbar-button ng-click="myNavigator.popPage()"><ons-icon icon="ion-ios-arrow-back" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="center" style="margin: 0 auto; text-align: center;"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-home" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="right"></div>
+        </ons-toolbar>
+        <div style="text-align: center; margin-top: 5%;">
+            <div><h2>Dashboard</h2></div>
+            <hr>
+        </div>
+
+        <div style="margin-left: 2%; margin-right: 2%;text-align: justify">
+            <div>
+                <p>Het dashboard is onderverdeeld in 6 tegels. De bovenste twee tegels dienen om respectievelijk een hoofdpijn <i class="fa fa-user-md"></i> en een medicijn <i class="fa fa-medkit"></i> inname te registreren</p>
+            </div>
+            <br/>
+            <div>
+                <p>De grote tegel in het midden <i class="fa fa-calendar-check-o"></i> toont u real-time informatie over de al ingevoerde medicijnen en hoofdpijnen. Bij het drukken op de middelste tegel gaat u naar de geschiedenis pagina van de app. Hier kunt u alle ingevulde items zien in lijstformaat of in kalender vorm. </p>
+            </div>
+            <br/>
+            <div>
+                <p>Verder hebben we nog de tegels voor advies <i class="fa fa-info-circle"></i> en dagboek <i class="fa fa-calendar-check-o"></i>. De advies pagina vertelt u indien mogelijk welke behandeling de dokter u voorschrijft. De dagboek pagina brengt u naar uw dagboekpagina van vandaag.</p>
+            </div>
+            <br/>
+            <div>
+                <p>De onderste tegel van het dashboard brengt u real-time info over de laatste hoofdpijn (indien geregistreerd). Als de balk <span style="color: #01579B">blauw</span>  is, dan heeft u de laatste hoofdpijn correct geregistreerd.
+                    De app vertelt u dan hoelang u al hoofdpijnvrij bent. Indien de tegel <span style="color: #f9332f">rood</span> gekleurd is, dan betekent dit dat de laatst geregistreerde hoofpijn nog niet afgerond is (er is nog geen eind- datum/tijd ingesteld. U kunt simpelweg op de tegel drukken om de hoofdpijn af te sluiten en/of informatie toe te voegen.</p>
+            </div>
+
+
+        </div>
+
+        <ons-row>
+
+        </ons-row>
+    </ons-page>
+</script>
+
+
+<script type="text/ons-template" id="manualAddHeadache.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left"><ons-toolbar-button ng-click="myNavigator.popPage()"><ons-icon icon="ion-ios-arrow-back" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="center" style="margin: 0 auto; text-align: center;"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-home" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="right"><ons-toolbar-button ng-click="myNavigator.pushPage('intensityHelp.html')"><ons-icon icon="ion-ios-help" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+        </ons-toolbar>
+        <div style="text-align: center; margin-top: 5%;">
+            <div><h2>Hoofdpijn</h2></div>
+            <hr>
+        </div>
+
+        <div style="margin-left: 2%; margin-right: 2%;text-align: justify">
+            <p>Het toevoegen van een hoofdpijn start met het toevoegen van de sterkte van de hoofdpijn op een ogenblik. De eerste waarde van de sterkte van de hoofdpijn dient ook als starttijd van de hoofdpijn. Door het klikken op de <i class="ion-plus-round"></i> icoon kom je op een nieuwe pagina waar je de intensiteit moet ingeven en het tijdstip. U kan er zoveel toevoegen als u wil.</p>
+            <br/>
+            <p>Naast de intensiteit op verschillende tijdstippen kan u ook het eindtijdstip instellen van de hoofdpijn. </p>
+            <br/>
+            <p>De intensiteit wordt aangeduid op een schaal van 0 tot 10 <ons-icon icon="ion-ios-help" ng-click="myNavigator.pushPage('intensityHelp.html')" style="font-size: 150%;"></ons-icon></p>
+            <br/>
+
+            <br/>
+            <p>Wanneer u op volgende <i class="ion-ios-icon-forward"></i> klikt  u de locatie van de hoofdpijn ingeven door op de juiste plaats op de figuur te drukken. U kunt vanuit vier verschillende standpunten bekijken.</p>
+            <br/>
+            <p>Op het volgende scherm heeft u de mogelijkheid om de symptomen aan te duiden die u ondervindt of ondervond.</p>
+            <br/>
+            <p>Als laatste kan u nog de triggers aanduiden die de hoofdpijn zouden kunnen veroorzaakt hebben.</p>
+        </div>
+    </ons-page>
+</script>
+
+<script type="text/ons-template" id="intensityHelp.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left"><ons-toolbar-button ng-click="myNavigator.popPage()"><ons-icon icon="ion-ios-arrow-back" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="center" style="margin: 0 auto; text-align: center;"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-home" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="right"></div>
+        </ons-toolbar>
+        <ul>
+            <li style="color: #01579B">10</li>
+            <li>Hoogst mogelijke pijn</li>
+            <li>onmogelijk om normaal te functioneren</li>
+            <li>grootste indenkbare pijn</li>
+            <li>bedrust aangeraden</li>
+            <br/>
+            <li style="color: #01579B">9</li>
+            <li>Heel hevige pijn</li>
+            <li>Mogelijk niet helder denken of spreken</li>
+            <li>Mogelijk niet normaal functioneren</li>
+            <li>bedrust aangeraden</li>
+            <br/>
+            <li style="color: #01579B">8</li>
+            <li>Hevige pijn</li>
+            <li>Verhindert normale activiteiten</li>
+            <li>rust aangeraden</li>
+            <br/>
+            <li style="color: #01579B">7</li>
+            <li>Hoge pijn</li>
+            <li>Moeilijk om zich te concentreren</li>
+            <li>Moeilijk om dagelijkste activiteiten uit te voeren</li>
+            <br/>
+            <li style="color: #01579B">6</li>
+            <li>Middelhoge pijn</li>
+            <li>Limiteert dagelijkse activiteiten</li>
+            <li>Sommige activiteiten krijgen lagere prioriteit</li>
+            <br/>
+            <li style="color: #01579B">5</li>
+            <li>Middelmatige pijn</li>
+            <li>Nood om het wat rustiger aan te doen</li>
+            <li>De pijn leidt meer af</li>
+            <br/>
+            <li style="color: #01579B">4</li>
+            <li>Milde-middelmatige pijn</li>
+            <li>Gewoonlijke activiteiten worden moelijker</li>
+            <br/>
+            <li style="color: #01579B">3</li>
+            <li>Afleidende pijn</li>
+            <li>Gewoonlijke activiteiten nog mogelijk</li>
+            <li>Kunnen moeilijker zijn</li>
+            <br>
+            <li style="color: #01579B">2</li>
+            <li>Milde pijn</li>
+            <li>Gewoonlijke activiteiten nog mogelijk</li>
+            <li>Kunnen moeilijker zijn</li>
+            <li style="color: #01579B">1</li>
+            <li>Heel milde pijn</li>
+            <li>Geen afleiding bij gewoonlijke activiteiten</li>
+            <br>
+            <li style="color: #01579B">0</li>
+            <li>Geen pijn</li>
+            <li>Geen hoofdpijn</li>
+        </ul>
+    </ons-page>
+</script>
+
+
+<script type="text/ons-template" id="manualAddMedicine.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left"><ons-toolbar-button ng-click="myNavigator.popPage()"><ons-icon icon="ion-ios-arrow-back" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="center" style="margin: 0 auto; text-align: center;"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-home" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="right"></div>
+        </ons-toolbar>
+        <div style="text-align: center; margin-top: 5%;">
+            <div><h2>Medicijn</h2></div>
+            <hr>
+        </div>
+
+        <div style="margin-left: 2%; margin-right: 2%;text-align: justify">
+            <p>Een inname van een medicijn toevoegen is heel eenvoudig. U hoeft enkel het medicijn te selecteren en het tijdstip. Als het medicijn niet in de keuzelijst staat kan u drukken op "..." om zelf de naam van een medicijn in te geven.</p>
+        </div>
+    </ons-page>
+</script>
+
+<script type="text/ons-template" id="manualHistory.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left"><ons-toolbar-button ng-click="myNavigator.popPage()"><ons-icon icon="ion-ios-arrow-back" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="center" style="margin: 0 auto; text-align: center;"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-home" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="right"></div>
+        </ons-toolbar>
+        <div style="text-align: center; margin-top: 5%;">
+            <div><h2>Geschiedenis</h2></div>
+            <hr>
+        </div>
+
+        <div style="margin-left: 2%; margin-right: 2%;text-align: justify">
+            <p>De geschiedenis wordt steeds geopend in de kalendervorm. In deze kalender kunt u alle geregistreerde items bekijken in maand, week en dag formaat. De hoofdpijnen <i class="fa fa-user-md"></i> zijn in het <span class="headache">rood</span> gemarkeerd, terwijl de medicijnen <i class="fa fa-medkit"></i> in het <span class="medicine">groen</span> gemarkeerd zijn.</p>
+            <br/>
+            <p>U kunt bovenaan ook kiezen voor de lijstvorm <i class="fa fa-calendar"></i>. In de lijst kunt u alle geregistreerde hoofdpijnen en medicijnen zien.</p>
+            <br/>
+            <p>Als u in de lijst of kalender view een item selecteert kunt u de gedetailleerde informatie bekijken. Hier kunt u ook de items verwijderen of bewerken.</p>
+            <br/>
+            <p>Als u op een dag klikt wordt u naar het dagboek van die dag verwezen.</p>
+
+        </div>
+    </ons-page>
+</script>
+
+<script type="text/ons-template" id="manualDiary.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left"><ons-toolbar-button ng-click="myNavigator.popPage()"><ons-icon icon="ion-ios-arrow-back" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="center" style="margin: 0 auto; text-align: center;"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-home" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="right"></div>
+        </ons-toolbar>
+        <div style="text-align: center; margin-top: 5%;">
+            <div><h2>Dagboek</h2></div>
+            <hr>
+        </div>
+
+        <div style="margin-left: 2%; margin-right: 2%;text-align: justify">
+            <p>In het dagboek kunt u bijhouden welke activiteiten u die dag allemaal gedaan hebt.</p>
+            <br/>
+            <p>Voor de maaltijden kunt u ofwel een tijd ingeven, of u kan aanduiden dat u deze maaltijd oversgeslagen hebt door op het icoontje naast de tijd te klikken.</p>
+        </div>
+    </ons-page>
+</script>
+
+
+<script type="text/ons-template" id="manualAdvies.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left"><ons-toolbar-button ng-click="myNavigator.popPage()"><ons-icon icon="ion-ios-arrow-back" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="center" style="margin: 0 auto; text-align: center;"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-home" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="right"></div>
+        </ons-toolbar>
+        <div style="text-align: center; margin-top: 5%;">
+            <div><h2>Advies</h2></div>
+            <hr>
+        </div>
+
+        <div style="margin-left: 2%; margin-right: 2%;text-align: justify">
+            <p>Op deze pagina kunt u het advies lezen over de behandeling die de dokter voorschrijft. Dit betreft het innemen van medicatie, het vermijden van triggers en meer.</p>
+            <br/>
+        </div>
+    </ons-page>
+</script>
+
+<script type="text/ons-template" id="manualSettings.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left"><ons-toolbar-button ng-click="myNavigator.popPage()"><ons-icon icon="ion-ios-arrow-back" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="center" style="margin: 0 auto; text-align: center;"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-home" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="right"></div>
+        </ons-toolbar>
+        <div style="text-align: center; margin-top: 5%;">
+            <div><h2>Instellingen</h2></div>
+            <hr>
+        </div>
+
+        <div style="margin-left: 2%; margin-right: 2%;text-align: justify">
+            <p>Op deze pagina kunt vindt u opties in verband met de data van de app, uw dagelijkse inname van medicijnen en de handleiding zelf</p>
+            <br/>
+            <p>De optie clear cache dient om de geregistreerde informatie LOKAAL te verwijderen.</p>
+            <br/>
+            <p>Op de profielpagina van de app kunt u de medicatie instellen die u dagelijks inneemt.</p>
+        </div>
+    </ons-page>
+</script>
+
+</body>
+</html>

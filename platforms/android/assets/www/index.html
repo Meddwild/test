@@ -1,108 +1,62 @@
-<!DOCTYPE html>
-<html>
+<!--
+ 	Chronicals, v1.0
+ 	Created by Kiani Lannoye & Gilles Vandewiele, commissioned by UZ Ghent
+    https://github.com/kianilannoye/Chronicals
+    This html file is the view for viewing or modifying a headache.
+-->
+
+<!doctype html>
+<html lang="en" ng-app="Chronic">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="format-detection" content="telephone=no"/>
-  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"/>
-  <link rel="stylesheet" type="text/css" href="css/index.css"/>
-  <meta name="msapplication-tap-highlight" content="no"/>
-  <title>Hello World</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <meta http-equiv="Content-Security-Policy">
+
+
+    <title>Geen naam</title>
+
+
+    <!-- Our style sheet -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- AngularJS + ngStorage | MIT License | https://angularjs.org/ -->
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script src="./js/angular/angular.js"></script>
+    <script src="./js/angular/ngStorage.min.js"></script>
+
+    <!-- onsenui v1.3.11 | Apache License | http://onsen.io/ -->
+    <script src="./js/vendor/onsenui.min.js"></script>
+
+    <!-- jQuery | MIT License | https://jquery.org/ -->
+    <script src="./js/vendor/jquery-2.1.4.js"></script>
+
+    <!-- Main file & Headache controller -->
+    <script src="./js/controllers/chronic.js"> </script>
+    <!--/*Dataservice VOOR de controller-->
+    <script src="./js/services/backgroundservice.js"></script>
+    <script src="./js/services/dataservice.js"> </script>
+
+    <script src="./js/index.js"></script>
+    <script src="./js/controllers/indexController.js"> </script>
+    <script src="./js/vendor/Chart.min.js"></script>
+    <script src="./js/vendor/angular-chart.js"></script>
+
+
+    <script src="./js/vendor/jquery-2.1.4.js"></script>
+
+
+
 </head>
-<body>
-<div class="app">
-  <img id="image" style="position:absolute; top:10px; left:10px" src="" />
 
-  <h1>Google+</h1>
-
-  <div id="deviceready">
-    <p class="event listening">Connecting to Device</p>
-    <p class="event received">Device is Ready</p>
-
-    <p id="feedback">not logged in</p>
-    <button onclick="isAvailable()">Available?</button>
-    <br/><br/>
-    <button onclick="login()">Login with Google+</button>
-    <br/><br/>
-    <button onclick="trySilentLogin()">Try silent login with Google+</button>
-    <br/><br/>
-    <button onclick="logout()">Logout</button>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <button onclick="disconnect()">Disconnect</button>
-    <br/><br/>
-    <button onclick="window.plugins.googleplus.getSigningCertificateFingerprint(function(res){alert(res)}, function(res){alert(res)})">get cert fingerprint (Android)</button>
-  </div>
+<body ng-controller="indexController">
+<div id="loadingImg" style="display: block;width: 100%;">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
 </div>
-<script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript">
 
-  app.initialize();
 
-  function isAvailable() {
-    window.plugins.googleplus.isAvailable(function(avail) {alert(avail)});
-  }
 
-  function login() {
-    window.plugins.googleplus.login(
-        {},
-        function (obj) {
-          document.querySelector("#image").src = obj.imageUrl;
-          document.querySelector("#image").style.visibility = 'visible';
-          document.querySelector("#feedback").innerHTML = "Hi, " + obj.displayName + ", " + obj.email;
-		  console.info(obj);
-        },
-        function (msg) {
-          document.querySelector("#feedback").innerHTML = "error: " + msg;
-        }
-    );
-  }
-
-  function trySilentLogin() {
-    window.plugins.googleplus.trySilentLogin(
-        {},
-        function (obj) {
-          document.querySelector("#image").src = obj.imageUrl;
-          document.querySelector("#image").style.visibility = 'visible';
-          document.querySelector("#feedback").innerHTML = "Silent hi, " + obj.displayName + ", " + obj.email;
-        },
-        function (msg) {
-          document.querySelector("#feedback").innerHTML = "error: " + msg;
-        }
-    );
-  }
-
-  function logout() {
-    window.plugins.googleplus.logout(
-        function (msg) {
-          document.querySelector("#image").style.visibility = 'hidden';
-          document.querySelector("#feedback").innerHTML = msg;
-        },
-        function (msg) {
-          document.querySelector("#feedback").innerHTML = msg;
-        }
-    );
-  }
-
-  function disconnect() {
-    window.plugins.googleplus.disconnect(
-        function (msg) {
-          document.querySelector("#image").style.visibility = 'hidden';
-          document.querySelector("#feedback").innerHTML = msg;
-        },
-        function (msg) {
-          document.querySelector("#feedback").innerHTML = msg;
-        }
-    );
-  }
-
-  window.onerror = function(what, line, file) {
-    alert(what + '; ' + line + '; ' + file);
-  };
-
-  function handleOpenURL (url) {
-    document.querySelector("#feedback").innerHTML = "App was opened by URL: " + url;
-  }
-
-</script>
 </body>
 </html>

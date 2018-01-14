@@ -106,7 +106,10 @@ if (window.location.protocol === "file:") {
     window.handleClientLoad = function() {
         gapi.load('auth2', function () {
             gapi.auth2.init({
-                client_id: "175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf.apps.googleusercontent.com" // CLIENT_ID is populated by the cordova after_prepare hook
+                client_id: "175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf.apps.googleusercontent.com", // CLIENT_ID is populated by the cordova after_prepare hook
+				'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/fitness.activity.write https://www.googleapis.com/auth/fitness.body.read https://www.googleapis.com/auth/fitness.body.write https://www.googleapis.com/auth/fitness.location.read https://www.googleapis.com/auth/fitness.location.write https://www.googleapis.com/auth/fitness.nutrition.read https://www.googleapis.com/auth/fitness.nutrition.write',
+				//'webClientId': '175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+				//'offline': true
             }).then(function () {
                 __googleSdkReady = true;
 

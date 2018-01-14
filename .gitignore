@@ -1,0 +1,7 @@
+.idea/
+plugins/*
+*.apk
+node_modules*
+package*.json
+platforms*
+plugins*

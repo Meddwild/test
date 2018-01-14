@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en" ng-app="Chronic">
+<head>
+    <meta charset="utf-8">
+
+    <title>Dagboek</title>
+
+    <!-- Our style sheet -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <script src="../cordova.js"></script>
+    <!-- AngularJS | MIT License | https://angularjs.org/ -->
+    <script src="../js/angular/angular.js"></script>
+    <script src="../js/angular/ngStorage.min.js"></script>
+
+    <!-- jQuery | MIT License | https://jquery.org/ -->
+    <script src="../js/vendor/jquery-2.1.4.js"></script>
+
+    <!-- onsenui v1.3.11 | Apache License | http://onsen.io/ -->
+    <script src="../js/vendor/onsenui.min.js"></script>
+
+    <script src="../js/controllers/chronic.js"></script>
+    <script src="../js/services/backgroundservice.js"></script>
+    <script src="../js/services/dataservice.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/controllers/diaryController.js"></script>
+    <script src="../js/vendor/Chart.min.js"></script>
+    <script src="../js/vendor/angular-chart.js"></script>
+    <script src="../js/cryptojs/SHA3.js"></script>
+
+    <link rel="stylesheet" href="../css/angular-chart.css">
+
+</head>
+
+<body ng-controller="diaryController">
+<div id="loadingImg" style="display: block;">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<ons-toolbar>
+    <div class="left">
+    <ons-toolbar-button ng-click="transition();" onclick="location.href='history.html'"><i class="fa fa-chevron-left"></i>
+    </ons-toolbar-button>
+    </div>
+    <div class="center">
+    <div class="label" style="width: 65%;text-align: center">{{getDateString()}}</div>
+    </div>
+</ons-toolbar>
+
+
+
+<div class="site__container">
+
+    <div class="grid__container">
+
+        <form id="diaryForm" ng-submit="submitDiary()" method="post" class="form form--login" name="diaryForm">
+
+            <ons-row>
+                <p class="label list_separator">Om hoe laat heeft u gegeten?</p>
+            </ons-row>
+
+            <div class="form__field">
+                <label class="fontawesome-coffee" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_breakfast" ng-click="toggleBreakfast()"> <span class="hidden">Ontbijt</span></label>
+                <input id="daily_breakfast" ng-model="data.breakfastTime" type="time" class="form__input" placeholder="{{data.breakfastTime}}" ng-disabled="disableBreakfast">
+            </div>
+
+            <div class="form__field">
+                <label class="fontawesome-food" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_lunch"> <span class="hidden" ng-click="toggleLunch()">Lunch</span></label>
+                <input id="daily_lunch" ng-model="data.lunchTime" type="time" class="form__input" placeholder="{{data.lunchTime}}">
+            </div>
+
+            <div class="form__field">
+                <label class="fontawesome-food" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily__dinner"> <span class="hidden" ng-click="toggleDinner()">Avondeten</span></label>
+                <input id="daily__dinner" ng-model="data.dinnerTime" type="time" class="form__input" placeholder="{{data.dinnerTime}}">
+            </div>
+
+            <h6>Indien u een maaltijd overgeslagen hebt, klik dan op het logo naast het uur om dit duitelijk te maken</h6>
+
+            <ons-row>
+                <p class="label list_separator">Hoe lang heeft u gesport vandaag?</p>
+            </ons-row>
+
+            <div class="form__field">
+                <label class="fontawesome-user" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_sport"> <span class="hidden">Uren gesport</span></label>
+                <input id="daily_sport" ng-model="data.sportHours" type="time" class="form__input" placeholder="{{data.sportHours}}">
+            </div>
+
+            <ons-row>
+                <p class="label list_separator">Om hoe laat ging u slapen, en hoe lang heeft u geslapen?</p>
+            </ons-row>
+
+            <div class="form__field">
+                <label class="fontawesome-time" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_bedTime"> <span class="hidden">Bedtijd</span></label>
+                <input id="daily_bedTime" ng-model="data.bedTime" type="time" class="form__input" placeholder="{{data.bedTime}}">
+            </div>
+
+            <div class="form__field">
+                <label class="fontawesome-time" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_sleep"> <span class="hidden">Slaap</span></label>
+                <input id="daily_sleep" ng-model="data.sleepHours" type="time" class="form__input" step="60" placeholder="{{data.sleepHours}}">
+            </div>
+
+            <ons-row>
+                <p class="label list_separator">Hoeveel van de volgende middelen heeft u gebruikt?</p>
+            </ons-row>
+
+            <div class="form__field">
+                <label class="fontawesome-glass" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_alcohol"> <span class="hidden">Alcohol</span></label>
+                <input id="daily_alcohol" ng-model="data.alcohol" type="number" class="form__input" placeholder="{{data.alcohol}}" min="0" max="20">
+            </div>
+
+            <div class="form__field">
+                <label class="fontawesome-coffee" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_cafeine"> <span class="hidden">Cafeine</span></label>
+                <input id="daily_cafeine" ng-model="data.cafeine" type="number" class="form__input" placeholder="{{data.cafeine}}" min="0" max="20">
+            </div>
+
+            <div class="form__field">
+                <label class="fontawesome-fire" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_tobacco"> <span class="hidden">Tabak</span></label>
+                <input id="daily_tobacco" ng-model="data.tobacco" type="number" class="form__input" placeholder="{{data.tobacco}}" min="0" max="20">
+            </div>
+
+            <ons-row>
+                <p class="label list_separator">Op een schaal van 1-10, hoe stressvol was uw dag?</p>
+            </ons-row>
+
+            <div class="form__field">
+                <label class="fontawesome-briefcase" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_stress"> <span class="hidden">Stress</span></label>
+                <input id="daily_stress" ng-model="data.stresslvl" type="number" class="form__input" placeholder="{{data.stresslvl}}" min="0" max="10">
+            </div>
+
+            <div class="form__field">
+                <ons-button type="submit" ng-click='submitDiary()' style="width:100%; text-align: center;"/>Sla op</ons-button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

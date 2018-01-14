@@ -32,7 +32,7 @@ buildscript {
     // http://tools.android.com/tech-docs/new-build-system/version-compatibility
     // and https://issues.apache.org/jira/browse/CB-8143
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:2.2.3'
     }
 }
 
@@ -92,6 +92,9 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
+apply from: "cordova-plugin-badge/chronicals-badge.gradle"
+apply from: "cordova-plugin-local-notification/chronicals-localnotification.gradle"
+apply from: "cordova-plugin-mauron85-background-geolocation/chronicals-logtofile.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras = file('build-extras.gradle').exists()
@@ -253,6 +256,9 @@ dependencies {
     // SUB-PROJECT DEPENDENCIES START
     debugCompile(project(path: "CordovaLib", configuration: "debug"))
     releaseCompile(project(path: "CordovaLib", configuration: "release"))
+    compile "com.android.support:support-v4:26.+"
+    compile "com.google.android.gms:play-services-location:+"
+    compile "com.android.support:support-v4:+"
     compile "com.google.android.gms:play-services-auth:+"
     compile "com.google.android.gms:play-services-identity:+"
     // SUB-PROJECT DEPENDENCIES END

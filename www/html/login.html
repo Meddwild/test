@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app="Chronic">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy">
+    <title>Geen naam</title>
+
+    <!-- Our style sheet -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/login.css">
+
+    <script src="../cordova.js"></script>
+    <!-- AngularJS + ngStorage | MIT License | https://angularjs.org/ -->
+    <script src="../js/angular/angular.js"></script>
+    <script src="../js/angular/ngStorage.min.js"></script>
+
+    <!-- onsenui v1.3.11 | Apache License | http://onsen.io/ -->
+    <script src="../js/vendor/onsenui.min.js"></script>
+
+    <!-- jQuery | MIT License | https://jquery.org/ -->
+    <script src="../js/vendor/jquery-2.1.4.js"></script>
+
+    <!--moment | MIT License -->
+    <script src='../lib/moment.min.js'></script>
+
+    <!-- Main file & Headache controller -->
+    <script src="../js/controllers/chronic.js"></script>
+    <!--/*Dataservice VOOR de controller-->
+    <script src="../js/services/backgroundservice.js"></script>
+    <script src="../js/services/dataservice.js"></script>
+    <script src="../js/cryptojs/SHA3.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/controllers/loginController.js"></script>
+    <script src="../js/vendor/Chart.min.js"></script>
+    <script src="../js/vendor/angular-chart.js"></script>
+
+
+</head>
+<body class="align" ng-controller="loginController">
+<div id="loadingImg" style="display: block;width: 100%;">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+
+
+<div id="container" class="site__container">
+
+    <div class="grid__container">
+
+
+        <form ng-submit="submitLogin()" method="post" class="form form--login">
+
+            <div class="form__field">
+                <label class="fontawesome-lock" style="width: 80px; padding-left: 10px; padding-right: 10px;"
+                       for="login__password"> <span class="hidden">Pin</span></label>
+                <input id="login__password" type="password" ng-model="password" class="form__input"
+                       placeholder="Paswoord" pattern="[0-9]*" inputmode="numeric"  >
+            </div>
+
+            <div class="form__field">
+                <input type="submit" value="Log in met Google">
+            </div>
+
+            <div class="error_message" style="display: none">
+                <p class="text--center" style="color: #cd0a0a">Verkeerde pin</p>
+            </div>
+
+            <!--<div id="response">hi {{response}}</div>-->
+
+        </form>
+
+        <p class="text--center">Nog geen account? <a href="register.html">Maak account aan</a> <span
+            class="fontawesome-arrow-right"></span></p>
+
+
+        <!--<button class="button" style="width: 100%" ng-click="googleLogout()">Logout from Google</button>-->
+
+    </div>
+
+</div>
+
+</body>
+</html>

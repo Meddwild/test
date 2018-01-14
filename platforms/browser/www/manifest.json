@@ -1,11 +1,18 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "chronicals",
-  "short_name": "chronicals",
+  "name": "Chronicals",
+  "short_name": "Chronicals",
   "version": "be.ugent.chronicals",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
-  "author": "Apache Cordova Team",
-  "icons": [],
+  "description": "A headache diary app",
+  "author": "Kiani Lannoye and Gilles Vandewiele",
+  "icons": [
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
+    }
+  ],
+  "orientation": "portrait",
   "start_url": "index.html"
 }

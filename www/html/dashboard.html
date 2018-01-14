@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en" ng-app="Chronic">
+<head>
+    <meta charset="utf-8">
+
+    <title>Geen naam</title>
+
+    <!--<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">-->
+
+
+    <!-- Our style sheet -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <script src="../cordova.js"></script>
+    <!-- AngularJS + ngStorage | MIT License | https://angularjs.org/ -->
+    <script src="../js/angular/angular.js"></script>
+    <script src="../js/angular/ngStorage.min.js"></script>
+
+    <!-- jQuery | MIT License | https://jquery.org/ -->
+    <script src="../js/vendor/jquery-2.1.4.js"></script>
+
+
+    <!-- onsenui v1.3.11 | Apache License | http://onsen.io/ -->
+    <script src="../js/vendor/onsenui.min.js"></script>
+
+    <!-- Main file & Dashboard controller -->
+    <script src="../js/controllers/chronic.js"></script>
+    <script src="../js/services/backgroundservice.js"></script>
+    <script src="../js/services/dataservice.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/controllers/dashboardController.js"></script>
+    <script src="../js/vendor/Chart.min.js"></script>
+    <script src="../js/vendor/angular-chart.js"></script>
+    <script src="../js/cryptojs/SHA3.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+
+        // Call onDeviceReady when Cordova is loaded.
+        //
+        // At this point, the document has loaded but cordova-1.7.0.js has not.
+        // When Cordova is loaded and talking with the native device,
+        // it will call the event `deviceready`.
+        //
+        function onLoad() {
+
+            document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady(){
+                document.addEventListener("backbutton", backKeyDown, true);
+            }
+            document.addEventListener("backbutton", backKeyDown, true);
+        }
+        function backKeyDown(e) {
+            e.preventDefault();
+            if(confirm("Wil je de app afsluiten?")){
+                navigator.app.exitApp();
+            }else{
+
+            }
+
+        };
+
+
+
+    </script>
+
+</head>
+
+<body onload="onLoad()" ng-controller="dashboardController">
+<div id="loadingImg" style="display: block;">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+
+
+<ons-navigator>
+    <ons-toolbar>
+        <div class="center">
+            <div class="label" style="width: 65%;text-align: center">Welkom, {{getUserName()}}</div>
+        </div>
+        <div class="right">
+            <!--<ons-toolbar-button ng-click="transition();" onclick="location.href='gpsHistory.html'"><i class="icon fa fa-map-marker"></i>-->
+            <!--</ons-toolbar-button>-->
+            <ons-toolbar-button ng-click="transition();" onclick="location.href='settings.html'"><i class="icon fa fa-cog"></i>
+            </ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+
+    <ons-page class="dashboardPage">
+        <div class="dashboard">
+            <ons-row class="row">
+
+                <div class="tileContent tile half" ng-click="clearVariables();transition()" onclick="location.href='headache.html'">
+                    <div class="tileContentInner">
+                        <i class="icon fa fa-user-md"></i>
+
+                        <p>+Hoofdpijn</p>
+                    </div>
+                </div>
+
+                <div class="tileContent tile half last" ng-click="clearVariables();transition();" onclick="location.href='medicine.html'">
+                    <div class="tileContentInner">
+                        <i class="icon fa fa-medkit"></i>
+
+                        <p>+Medicijn</p>
+                    </div>
+                </div>
+
+            </ons-row>
+            <ons-row class="row stretch">
+
+                <div class="tileContent tile large" style="width: 100%;" ng-click="transition();" onclick="location.href='history.html'">
+                    <i class="icon fa fa-history dashboardMidIcon"></i>
+
+                    <div id="midTile" style="width:100%;">
+                        <ons-list class="list dashboardlist" style="height: 90%;overflow: scroll;">
+                            <ons-list-item ng-repeat="obj in listItems" class="list__item headache">
+                                <span class="list__item__line-height">
+                                    <div class="list-left">
+                                        <i ng-class="{'fa fa-user-md': obj.hasOwnProperty('end'), 'fa fa-medkit medicine': !obj.hasOwnProperty('end')}">     </i>
+                                    </div>
+                                    <div class="list-center" ng-class="{'medicine': !obj.hasOwnProperty('end')}">
+                                        {{obj.hasOwnProperty('end')? getTimeDateString(obj.intensityValues[0].key) : getTimeDateString(obj.date)}}
+                                    </div>
+                                    <div class="list-right"  ng-class="{'medicine': !obj.hasOwnProperty('end')}">
+                                        {{obj.hasOwnProperty('end') ? obj.intensityValues[0].value+"/10" : '&#160;'}}
+
+                                        <!--8/10-->
+                                    </div>
+                                </span>
+                            </ons-list-item>
+                        </ons-list>
+                    </div>
+                </div>
+
+            </ons-row>
+            <ons-row class="row">
+                <div class="tileContent tile half">
+                    <div class="tileContentInner" ng-click="transition();" onclick="location.href='advice.html'">
+                        <i class="icon fa fa-info-circle"></i>
+                        <p>Advies</p>
+                    </div>
+                </div>
+                <div class="tileContent tile half last" ng-click="transition();setDiaryDate()" onclick="location.href='diary.html'">
+                    <div class="tileContentInner">
+                        <i class="icon fa fa-calendar-check-o"></i>
+                        <p>Dagboek</p>
+                    </div>
+                </div>
+            </ons-row>
+            <ons-row class="row footer dashboardFooter" ng-click="show('options.html')">
+                <p>Het is al 8u geleden dat u hoofdpijn had!</p>
+            </ons-row>
+        </div>
+
+    </ons-page>
+</ons-navigator>
+
+<ons-template id="options.html" style="background-color: #1a252f;">
+    <ons-dialog var="dialog" cancelable style="background-color: #1a252f;">
+
+        <ons-list style="background-color: #1a252f;" >
+            <!--<ons-list-item class="listitem"  ng-click="closeListItem()"  onclick="location.reload()" modifier="tappable" style="border-bottom: 1px solid #FFFFFF;">-->
+                <!--Sluit hoofdpijn af (eind = nu)-->
+            <!--</ons-list-item>-->
+            <ons-list-item ng-click="addDetailsListItem()" onclick="location.href='headache.html'" class="listitem" modifier="tappable" style="border-bottom: 1px solid #FFFFFF;">
+                Intensiteit hoofdpijn toevoegen
+            </ons-list-item>
+            <ons-list-item style="display: none;"></ons-list-item>
+            <ons-list-item style="display: none;"></ons-list-item><ons-list-item style="display: none;"></ons-list-item>
+
+            <!--<ons-list-item ng-click="deleteListItem()" onclick="location.reload()" class="listitem" modifier="tappable">-->
+                <!--Hoofdpijn verwijderen-->
+            <!--</ons-list-item>-->
+        </ons-list>
+
+    </ons-dialog>
+</ons-template>
+</body>
+</html>

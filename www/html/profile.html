@@ -1,0 +1,204 @@
+<!--
+ 	Chronicals, v1.0
+ 	Created by Kiani Lannoye & Gilles Vandewiele, commissioned by UZ Ghent
+    https://github.com/kianilannoye/Chronicals
+
+    This html file is the view for adding or modifying a headache.
+-->
+
+<!doctype html>
+<html lang="en" ng-app="Chronic">
+<head>
+    <meta charset="utf-8">
+
+    <title>Profiel</title>
+    <script src="../cordova.js"></script>
+    <!-- Our style sheet -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- AngularJS + ngStorage | MIT License | https://angularjs.org/ -->
+    <script src="../js/angular/angular.js"></script>
+    <script src="../js/angular/ngStorage.min.js"></script>
+
+    <!-- onsenui v1.3.11 | Apache License | http://onsen.io/ -->
+    <script src="../js/vendor/onsenui.min.js"></script>
+
+    <!-- jQuery | MIT License | https://jquery.org/ -->
+    <script src="../js/vendor/jquery-2.1.4.js"></script>
+
+    <!-- Main file & Headache controller -->
+    <script src="../js/controllers/chronic.js"> </script>
+    <!--/*Dataservice VOOR de controller-->
+    <script src="../js/services/backgroundservice.js"></script>
+    <script src="../js/services/dataservice.js"> </script>
+    <script src="../js/cryptojs/SHA3.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/controllers/profileController.js"> </script>
+    <script src="../js/vendor/Chart.min.js"></script>
+    <script src="../js/vendor/angular-chart.js"></script>
+
+
+
+</head>
+<body ng-controller="profileController">
+<div id="loadingImg" style="display: block;">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+
+<ons-navigator var="myNavigator" class="hidden">
+    <!-- Intensity page -->
+    <ons-page id="dailyMedicineList.html">
+        <ons-toolbar>
+            <div class="left"><div class="left" ng-click=";transition();" onclick="location.href='settings.html'"><ons-icon icon="ion-ios-arrow-back" style="font-size: 32px"></ons-icon><ons-toolbar-button></ons-toolbar-button></div></div>
+            <div class="center" style="margin: 0 auto; text-align: center;"></div>
+            <div class="right"></div>
+        </ons-toolbar>
+
+        <div>
+            <div style="text-align: center;">
+                <h1>Profiel</h1>
+            </div>
+
+            <ons-row style="margin-top: 2%;">
+                <p class="label list_header">Persoonlijke informatie</p>
+            </ons-row>
+
+            <error class="error" style="margin-left: 2%; font-weight: bold; color: red; display: none;">
+                {{foutmelding}}
+            </error>
+
+            <div ng-if="user != null">
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col width="45%"><p class="label">ID</p></ons-col>
+                    <ons-col style="margin-right: 5%;"><span><strong>{{user.patientID}}</strong></span></ons-col>
+                </ons-row>
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col width="45%"><p class="label">Geboortedatum</p></ons-col>
+                    <ons-col style="margin-right: 5%;"><input class="textField" type="date" ng-model="data.birthdate"/></ons-col>
+                </ons-row>
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col width="45%"><p class="label">Geslacht</p></ons-col>
+                    <ons-col style="margin-right: 5%;">
+                        <select class="textField" ng-model="data.sex" ng-options="s for s in data.sexes"></select>
+                    </ons-col>
+                </ons-row>
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col width="45%"><p class="label">Status</p></ons-col>
+                    <ons-col style="margin-right: 5%;">
+                        <select class="textField" ng-model="data.relationship" ng-options="r for r in data.relationships">
+                        </select></ons-col>
+                </ons-row>
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col width="45%"><p class="label">Werkstatus</p></ons-col>
+                    <ons-col style="margin-right: 5%;">
+                        <select class="textField" ng-model="data.employment" ng-options="e for e in data.employments">
+                        </select></ons-col>
+                </ons-row>
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col width="45%"><p class="label">E-mail</p></ons-col>
+                    <ons-col style="margin-right: 5%;"><input class="textField" type="text" ng-model="user.email"/></ons-col>
+                </ons-row>
+
+
+                <ons-row style="margin-top: 2%;">
+                    <p class="label list_header">Uw dagelijkse gewoontes</p>
+                </ons-row>
+
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col width="45%"><p class="label">Stad</p></ons-col>
+                    <ons-col style="margin-right: 5%;"><input class="textField" type="text" ng-model="dailyLife.city"/></ons-col>
+                </ons-row>
+
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col width="45%"><p class="label">Ontbijt</p></ons-col>
+                    <ons-col style="margin-right: 5%;"><input class="textField" type="time" ng-model="data.breakfastTime"/></ons-col>
+                </ons-row>
+
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col width="45%"><p class="label">Lunch</p></ons-col>
+                    <ons-col style="margin-right: 5%;"><input class="textField" type="time" ng-model="data.lunchTime"/></ons-col>
+                </ons-row>
+
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col width="45%"><p class="label">Avondeten</p></ons-col>
+                    <ons-col style="margin-right: 5%;"><input class="textField" type="time" ng-model="data.dinnerTime"/></ons-col>
+                </ons-row>
+
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col width="45%"><p class="label">uren gesport</p></ons-col>
+                    <ons-col style="margin-right: 5%;"><input class="textField" type="time" ng-model="data.sportHours"/></ons-col>
+                </ons-row>
+
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col width="45%"><p class="label">Bedtijd</p></ons-col>
+                    <ons-col style="margin-right: 5%;"><input class="textField" type="time" ng-model="data.bedTime"/></ons-col>
+                </ons-row>
+
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col width="45%"><p class="label">Uren slaap</p></ons-col>
+                    <ons-col style="margin-right: 5%;"><input class="textField" type="time" ng-model="data.sleepHours"/></ons-col>
+                </ons-row>
+
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col width="45%"><p class="label">Alcoholgebruik</p></ons-col>
+                    <ons-col style="margin-right: 5%;"><input class="textField" type="number" ng-model="dailyLife.alcohol"/></ons-col>
+                </ons-row>
+
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col width="45%"><p class="label">Caffeinegebruik</p></ons-col>
+                    <ons-col style="margin-right: 5%;"><input class="textField" type="number" ng-model="dailyLife.cafeine"/></ons-col>
+                </ons-row>
+
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                <ons-col width="45%"><p class="label">Tabakgebruik</p></ons-col>
+                <ons-col style="margin-right: 5%;"><input class="textField" type="number" ng-model="dailyLife.tobacco"/></ons-col>
+            </ons-row>
+
+                <ons-row style="margin-left: 2%; margin-top: 2%;">
+                    <ons-col>
+                        <button id="change_pwd_btn" class="button" onclick="$('#change_pwd_btn').hide();$('#save_btn_1').hide();$('#change_password').show();" style="width: 100%;">Verander PIN</button>
+                    </ons-col>
+                    <ons-col>
+                        <button id="save_btn_1" class="button finishButton" ng-click="saveUser()" style="width: 90%; margin-left: 5%;">Sla op</button>
+                    </ons-col>
+                </ons-row>
+
+                <div id="change_password" style="display:none;">
+                    <ons-row style="margin-left: 2%; margin-top: 2%;">
+                        <ons-col width="45%"><p class="label">Oude pin</p></ons-col>
+                        <ons-col><input class="textField" type="password" ng-model="data.oldPin"/></ons-col>
+                    </ons-row>
+                    <ons-row style="margin-left: 2%; margin-top: 2%;">
+                        <ons-col width="45%"><p class="label">Nieuwe pin</p></ons-col>
+                        <ons-col><input class="textField" type="password" ng-model="data.newPin1"/></ons-col>
+                    </ons-row>
+                    <ons-row style="margin-left: 2%; margin-top: 2%;">
+                        <ons-col width="45%"><p class="label">Nieuwe pin herhalen</p></ons-col>
+                        <ons-col><input class="textField" type="password" ng-model="data.newPin2"/></ons-col>
+                    </ons-row>
+                    <ons-row style="margin-left: 2%; margin-top: 2%;">
+                        <ons-col>
+                            <button id="save_btn_2" class="button finishButton" ng-click="saveUser()" style="width: 45%;">Sla op</button>
+                        </ons-col>
+                    </ons-row>
+                </div>
+            </div>
+
+
+
+
+            <div ng-if="user == null">
+                <p class="label" style="margin-left: 2%;">U moet ingelogd zijn om uw persoonlijke informatie aan te passen.</p>
+            </div>
+        </div>
+    </ons-page>
+</ons-navigator>
+
+
+
+</body>
+</html>

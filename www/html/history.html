@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" ng-app="Chronic">
+<head>
+    <meta charset="utf-8">
+
+    <title>Geschiedenis</title>
+
+    <!-- Our style sheet -->
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../cordova.js"></script>
+    <!--Full Calendar Stylesheet-->
+    <link rel='stylesheet' href='../css/fullcalendar.min.css' />
+
+    <!-- AngularJS + ngStorage | MIT License | https://angularjs.org/ -->
+    <script src="../js/angular/angular.js"></script>
+    <script src="../js/angular/ngStorage.min.js"></script>
+
+    <!-- jQuery | MIT License | https://jquery.org/ -->
+    <script src="../js/vendor/jquery-2.1.4.js"></script>
+
+    <!--moment | MIT License -->
+    <script src='../lib/moment.min.js'></script>
+
+    <!-- onsenui v1.3.11 | Apache License | http://onsen.io/ -->
+    <script src="../js/vendor/onsenui.min.js"></script>
+
+    <!-- Full calendar JS | --->
+    <script src='../js/fullcalendar/fullcalendar.js'></script>
+    <!-- Main file & History controller -->
+  	<script src="../js/controllers/chronic.js"> </script>
+
+    <script src="../js/services/backgroundservice.js"></script>
+    <script src="../js/services/dataservice.js"> </script>
+    <script src="../js/index.js"></script>
+    <script src="../js/controllers/historyController.js"> </script>
+    <script src="../js/vendor/Chart.min.js"></script>
+    <script src="../js/vendor/angular-chart.js"></script>
+
+</head>
+
+<body ng-controller="historyController">
+<div style="display: block;" class="loadingImg">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<ons-navigator var="historyNavigator">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><i class="fa fa-chevron-left"></i> </ons-toolbar-button></div>
+            <!--<div class="center" style="margin: 0 auto; text-align: center;">Nieuwe hoofdpijn</div>-->
+            <div class="center">
+                <ons-toolbar-button>
+                    <ons-icon icon="fa fa-list"></ons-icon>
+                </ons-toolbar-button>
+                <ons-toolbar-button ng-click="goNextPage()">
+                    <ons-icon icon="fa fa-calendar buttonIcon"></ons-icon>
+                </ons-toolbar-button></div>
+            <div class="right"><ons-toolbar-button ng-click="historyNavigator.pushPage('manualHistory.html');"><ons-icon icon="ion-help" style="font-size: 100%;"></ons-icon></ons-toolbar-button></div>
+        </ons-toolbar>
+
+        <div id="history">
+            <ons-list class="list">
+                <ons-list-item ng-repeat="obj in listItems track by objTracker(obj)" class="list__item list__item--chevron headache hidden" ng-click="listClick(obj)">
+                    <span class="list__item__line-height">
+
+                        <div class="list-left">
+                            <i ng-class="{'fa fa-user-md': obj.hasOwnProperty('end'), 'fa fa-medkit medicine': !obj.hasOwnProperty('end')}">     </i>
+                        </div>
+                        <div class="list-center" ng-class="{'medicine': !obj.hasOwnProperty('end')}">
+                            {{obj.hasOwnProperty('end')? getTimeDateString(obj.intensityValues[0].key) : getTimeDateString(obj.date)}}
+                            <!--{{""+((new Date(obj.intensityValues[0].key)).getDate())+"/"+(obj.intensityValues[0].key.getMonth()+1)+"         "+obj.intensityValues[0].key.getHours()+":"+obj.intensityValues[0].key.getMinutes()}}-->
+                            <!--12 okt 15:45-->
+                        </div>
+                        <div class="list-right" ng-class="{'medicine': !obj.hasOwnProperty('end')}">
+                            {{obj.hasOwnProperty('end') ? obj.intensityValues[0].value+"/10" : "&#160;"}}
+
+                            <!--8/10-->
+                        </div>
+                    </span>
+                </ons-list-item>
+
+            </ons-list>
+        </div>
+
+    </ons-page>
+</ons-navigator>
+
+<script type="text/ons-template" id="calendarView.html">
+
+    <ons-page>
+        <ons-toolbar>
+            <div class="left"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><i class="fa fa-chevron-left"></i> </ons-toolbar-button></div>
+            <!--<div class="center" style="margin: 0 auto; text-align: center;">Nieuwe hoofdpijn</div>-->
+            <div class="center"><ons-toolbar-button ng-click="historyNavigator.popPage()"><ons-icon icon="fa fa-list"></ons-icon> </ons-toolbar-button><ons-toolbar-button ng><ons-icon icon="fa fa-calendar buttonIcon"></ons-icon></ons-toolbar-button></div>
+            <div class="right"><ons-toolbar-button ng-click="historyNavigator.pushPage('manualHistory.html');"><ons-icon icon="ion-help" style="font-size: 100%;"></ons-icon></ons-toolbar-button></div>
+        </ons-toolbar>
+        <div class="loadingImg" style="display: block;">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+        <div id='calendar' style="height: 100%;"></div>
+    </ons-page>
+</script>
+
+<script type="text/ons-template" id="manualHistory.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left"><ons-toolbar-button ng-click="historyNavigator.popPage()"><ons-icon icon="ion-ios-arrow-back" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="center" style="margin: 0 auto; text-align: center;"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-home" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="right"></div>
+        </ons-toolbar>
+        <div style="text-align: center; margin-top: 5%;">
+            <div><h2>Dagboek</h2></div>
+            <hr>
+        </div>
+
+        <div style="margin-left: 2%; margin-right: 2%;text-align: justify">
+            <p>Het dagboek wordt steeds geopend in de lijstvorm. In de lijst kunt u alle geregistreerde hoofdpijnen en medicijnen zien. De hoofdpijnen <i class="fa fa-user-md"></i> zijn in het <span class="headache">rood</span> gemarkeerd, terwijl de medicijnen <i class="fa fa-medkit"></i> in het <span class="medicine">groen</span> gemarkeerd zijn.</p>
+            <br/>
+            <p>U kunt bovenaan ook kiezen voor de kalendervorm <i class="fa fa-calendar"></i>. In deze kalender kunt u alle geregistreerde items bekijken in maand, week en dag formaat.</p>
+            <br/>
+            <p>Als u in de lijst of kalender view een item selecteert kunt u de gedetailleerde informatie bekijken. Hier kunt u ook de items verwijderen of bewerken.</p>
+
+        </div>
+    </ons-page>
+</script>
+
+</body>
+
+</html>

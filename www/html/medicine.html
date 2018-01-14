@@ -1,0 +1,139 @@
+<!--
+ 	Chronicals, v1.0
+ 	Created by Kiani Lannoye & Gilles Vandewiele, commissioned by UZ Ghent
+    https://github.com/kianilannoye/Chronicals
+
+    This html file is the view for adding or modifying a medicine.
+-->
+
+<!doctype html>
+<html lang="en" ng-app="Chronic">
+<head>
+  <meta charset="utf-8">
+
+  <title>Geen naam</title>
+    <script src="../cordova.js"></script>
+  <!-- Our style sheet -->
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- AngularJS + ngStorage | MIT License | https://angularjs.org/ -->
+  <script src="../js/angular/angular.js"></script>
+  <script src="../js/angular/ngStorage.min.js"></script>
+
+  <!-- onsenui v1.3.11 | Apache License | http://onsen.io/ -->
+  <script src="../js/vendor/onsenui.min.js"></script>
+
+  <!-- jQuery | MIT License | https://jquery.org/ -->
+  <script src="../js/vendor/jquery-2.1.4.js"></script>
+
+  <!-- Main file & Medicine controller -->
+  <script src="../js/controllers/chronic.js"> </script>
+    <script src="../js/services/backgroundservice.js"></script>
+  <script src="../js/services/dataservice.js"> </script>
+    <script src="../js/index.js"></script>
+  <script src="../js/controllers/medicineController.js"> </script>
+    <script src="../js/vendor/Chart.min.js"></script>
+    <script src="../js/vendor/angular-chart.js"></script>
+    <script src="../js/cryptojs/SHA3.js"></script>
+
+</head>
+
+<body ng-controller="medicineController">
+    <div id="loadingImg" style="display: block;">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
+    <ons-navigator var="myNavigator" class="hidden">
+        <ons-page>
+          <ons-toolbar>
+            <div class="left"></div>
+            <div class="center" style="margin: 0 auto; text-align: center;"></div>
+            <div class="right"><ons-toolbar-button ng-click="myNavigator.pushPage('manualAddMedicine.html');"><ons-icon icon="ion-help" style="font-size: 100%;"></ons-icon></ons-toolbar-button></div>
+          </ons-toolbar>
+
+          <div class="navigatorTab">
+            <div class="navigatorTabHead">
+                <h1>Medicijn ingeven</h1>
+            </div>
+
+            <div class="navigatorTabBody">
+                <form name="addMedicineForm">
+                    <ons-row>
+                        <p class="label list_header">Medicijn + hoeveelheid</p>
+                    </ons-row>
+                    <ons-row>
+                        <div class="selectDiv" style="width: 80%; margin-left: 10%;">
+                            <span class="selectDefault">{{selectedDrug.name}}</span>
+                              <select id="drugDropdown" ng-change="dropdownClick(selectedDrug)" ng-model="selectedDrug" name="drug" ng-options="drug as drug.name for drug in drugs" required>
+                                <option style="display:none" value=""></option>
+                              </select>
+                         </div>
+                         <!--<input id="ownDrug" type="text" ng-model="ownDrug" ng-change="typeText(ownDrug)">-->
+                         <!--<input type="number" name="quantity" style="width: 20%;" min="1" class="medicineQuantity" ng-model="drugQuantity" ng-change="typeNumber(drugQuantity)" required>
+                         <label style="margin-left: 2%;">mg</label>-->
+
+                     </ons-row>
+                    <ons-row style="margin-top: 5%;">
+                        <p style="margin-left: 10%;">{{selectedDrug.description}}</p>
+                    </ons-row>
+                    <!--<small class="error" ng-show="addMedicineForm.quantity.$error.required">
+                        - U moet een hoeveelheid ingeven!
+                    </small> <br/>
+                    <small class="error" ng-show="addMedicineForm.quantity.$error.min">
+                        - U moet een correcte hoeveelheid ingeven!
+                    </small> <br/>-->
+                    <small class="error" ng-show="addMedicineForm.drug.$error.required" style="margin-left: 10%;">
+                        - U moet een medicijn ingeven!
+                    </small> <br/>
+                     <ons-row>
+                         <p class="label list_header">Tijdstip van inname</p>
+                     </ons-row>
+                     <ons-row style="margin-right:auto; margin-left:auto;width: 100%;">
+                         <ons-col class="col ons-col-inner"><input style='margin-right:auto; margin-left:auto;width:8em' type="date" name="medicineDate" ng-model="drugDate" min="2015-01-01" max="2050-01-01" class="datePicker" required></ons-col>
+                     </ons-row>
+                    <ons-row style="margin-right:auto; margin-left:auto;width: 100%;">
+                         <ons-col class="col ons-col-inner"><input style='margin-right:auto; margin-left:auto;width:8em;color: black;height: 25px;background-color: #1a252f;color: #FFFFFF;' type="time" name="medicineTime"  ng-model="drugTime" step="60" required></ons-col>
+                     </ons-row>
+                    <ons-row style="margin-right:auto; margin-left:auto;width: 100%;">
+                        <small class="error" ng-show="addMedicineForm.medicineTime.$error.time">
+                            - U moet een geldig tijdstip ingeven!
+                         </small>
+                         <small class="error" ng-show="addMedicineForm.medicineDate.$error.date">
+                            - U moet een geldig datum ingeven!
+                         </small>
+                     </ons-row>
+                 </form>
+            </div>
+
+            <div class="navigatorTabFoot">
+                <ons-bottom-toolbar>
+                    <button class="button cancelButton"  ng-click="cancel();;transition();"><ons-icon icon="ion-close-round buttonIcon"></ons-icon> Annuleer</button>
+                    <button class="button finishButton" ng-disabled="addMedicineForm.$invalid" ng-click="typeTime(drugTime); typeDate(drugDate);addMedicine('dashboard.html');" style="float: right;">Sla op <ons-icon icon="ion-checkmark-round buttonIcon"></ons-icon></button>
+                </ons-bottom-toolbar>
+            </div>
+          </div>
+        </ons-page>
+    </ons-navigator>
+
+    <script type="text/ons-template" id="manualAddMedicine.html">
+        <ons-page>
+            <ons-toolbar>
+                <div class="left"><ons-toolbar-button ng-click="myNavigator.popPage()"><ons-icon icon="ion-ios-arrow-back" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+                <div class="center" style="margin: 0 auto; text-align: center;"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-home" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+                <div class="right"></div>
+            </ons-toolbar>
+            <div style="text-align: center; margin-top: 5%;">
+                <div><h2>Medicijn</h2></div>
+                <hr>
+            </div>
+
+            <div style="margin-left: 2%; margin-right: 2%;text-align: justify">
+                <p>Een inname van een medicijn toevoegen is heel eenvoudig. U hoeft enkel het medicijn te selecteren en het tijdstip. Als het medicijn niet in de keuzelijst staat kan u drukken op "..." om zelf de naam van een medicijn in te geven.</p>
+            </div>
+        </ons-page>
+    </script>
+
+</body>
+</html>

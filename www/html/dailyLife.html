@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app="Chronic">
+<head>
+    <meta charset="UTF-8">
+
+
+    <title>Geen naam</title>
+
+    <!-- Our style sheet -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/login.css">
+
+    <script type="text/javascript" src="../cordova.js"></script>
+    <!-- AngularJS + ngStorage | MIT License | https://angularjs.org/ -->
+    <script src="../js/angular/angular.js"></script>
+    <script src="../js/angular/ngStorage.min.js"></script>
+
+    <!-- onsenui v1.3.11 | Apache License | http://onsen.io/ -->
+    <script src="../js/vendor/onsenui.min.js"></script>
+
+    <!-- jQuery | MIT License | https://jquery.org/ -->
+    <script src="../js/vendor/jquery-2.1.4.js"></script>
+
+    <!-- Main file & Headache controller -->
+    <script src="../js/controllers/chronic.js"></script>
+    <!--/*Dataservice VOOR de controller-->
+    <script src="../js/index.js"></script>
+    <script src="../js/services/backgroundservice.js"></script>
+    <script src="../js/services/dataservice.js"></script>
+    <script src="../js/cryptojs/SHA3.js"></script>
+
+    <script src="../js/controllers/dailyLifeController.js"></script>
+    <script src="../js/vendor/Chart.min.js"></script>
+    <script src="../js/vendor/angular-chart.js"></script>
+
+
+</head>
+<body class="align" ng-controller="dailyLifeController">
+<div id="loadingImg" style="display: block;">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<div class="site__container">
+
+    <div class="grid__container">
+
+        <form ng-submit="submitDailyLife()" method="post" class="form form--login" name="dailyLifeForm">
+
+            <ons-row>
+                <p class="label list_header">In welke stad woont u?</p>
+            </ons-row>
+
+            <div class="form__field">
+                <label class="fontawesome-globe" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_city"> <span class="hidden">Stad</span></label>
+                <input id="daily_city" ng-model="city" type="text" class="form__input" placeholder="{{city}}">
+            </div>
+
+            <ons-row>
+                <p class="label list_header">Om hoe laat eet u gewoonlijk?</p>
+            </ons-row>
+
+            <div class="form__field">
+                <label class="fontawesome-coffee" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_breakfast"> <span class="hidden">Ontbijt</span></label>
+                <input id="daily_breakfast" ng-model="breakfastTime" type="time" class="form__input" placeholder="{{breakfastTime}}">
+            </div>
+
+            <div class="form__field">
+                <label class="fontawesome-food" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_lunch"> <span class="hidden">Lunch</span></label>
+                <input id="daily_lunch" ng-model="lunchTime" type="time" class="form__input" placeholder="{{lunchTime}}">
+            </div>
+
+            <div class="form__field">
+                <label class="fontawesome-food" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily__dinner"> <span class="hidden">Avondeten</span></label>
+                <input id="daily__dinner" ng-model="dinnerTime" type="time" class="form__input" placeholder="{{dinnerTime}}">
+            </div>
+
+            <ons-row>
+                <p class="label list_header">Hoe lang sport u gemiddeld per week?</p>
+            </ons-row>
+
+            <div class="form__field">
+                <label class="fontawesome-user" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_sport"> <span class="hidden">Uren gesport</span></label>
+                <input id="daily_sport" ng-model="sportHours" type="time" class="form__input" placeholder="{{sportHours}}">
+            </div>
+
+            <ons-row>
+                <p class="label list_header">Om hoe laat gaat u slapen, en hoe lang slaapt u?</p>
+            </ons-row>
+
+            <div class="form__field">
+                <label class="fontawesome-time" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_bedTime"> <span class="hidden">Bedtijd</span></label>
+                <input id="daily_bedTime" ng-model="bedTime" type="time" class="form__input" placeholder="{{bedTime}}">
+            </div>
+
+            <div class="form__field">
+                <label class="fontawesome-time" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_sleep"> <span class="hidden">Slaap</span></label>
+                <input id="daily_sleep" ng-model="sleepHours" type="time" class="form__input" step="60" placeholder="{{sleepHours}}">
+            </div>
+
+            <ons-row>
+                <p class="label list_header">Hoe veel porties van de volgende middelen gebruikt u wekelijks?</p>
+            </ons-row>
+
+            <div class="form__field">
+                <label class="fontawesome-glass" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_alcohol"> <span class="hidden">Alcohol</span></label>
+                <input id="daily_alcohol" ng-model="alcohol" type="number" class="form__input" placeholder="{{alcohol}}" min="0" max="20">
+            </div>
+
+            <div class="form__field">
+                <label class="fontawesome-coffee" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_cafeine"> <span class="hidden">Cafeine</span></label>
+                <input id="daily_cafeine" ng-model="cafeine" type="number" class="form__input" placeholder="{{cafeine}}" min="0" max="20">
+            </div>
+
+            <div class="form__field">
+                <label class="fontawesome-fire" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_tobacco"> <span class="hidden">Tabak</span></label>
+                <input id="daily_tobacco" ng-model="tobacco" type="number" class="form__input" placeholder="{{tobacco}}" min="0" max="20">
+            </div>
+
+            <ons-row ng-show="showMenstruation()">
+                <p class="label list_header">Wanneer begon uw laatste menstruatie en hoe lang duurt uw cyclus gewoonlijk?</p>
+            </ons-row>
+
+            <div class="form__field" ng-show="showMenstruation()">
+                <label class="fontawesome-calendar" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_mensDate"> <span class="hidden">Datum</span></label>
+                <input id="daily_mensDate" ng-model="menstruationDate" type="date" class="form__input" placeholder="{{menstruationDate}}">
+            </div>
+
+            <div class="form__field" ng-show="showMenstruation()">
+                <label class="fontawesome-time" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_mensDur"> <span class="hidden">Duratie</span></label>
+                <input id="daily_mensDur" ng-model="menstruationDuration" type="text" class="form__input" placeholder="{{menstruationDuration}}">
+            </div>
+
+            <ons-row>
+                <p class="label list_header">Bent u op dit moment in behandeling voor depressie?</p>
+            </ons-row>
+
+            <div class="slideThree">
+                <input type="checkbox" ng-model="depression" id="slideThree" name="check" checked />
+                <label for="slideThree"></label>
+            </div>
+            <div class="form__field">
+                <ons-button type="submit" ng-click='submitDailyLife()' style="width:100%; text-align: center;"/> Verzend </ons-button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

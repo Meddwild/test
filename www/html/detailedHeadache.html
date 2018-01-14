@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" ng-app="Chronic">
+<head>
+    <meta charset="utf-8">
+
+    <title>Details</title>
+
+    <!-- Our style sheet -->
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../cordova.js"></script>
+    <!-- AngularJS | MIT License | https://angularjs.org/ -->
+    <script src="../js/angular/angular.js"></script>
+    <script src="../js/angular/ngStorage.min.js"></script>
+
+    <!-- jQuery | MIT License | https://jquery.org/ -->
+    <script src="../js/vendor/jquery-2.1.4.js"></script>
+
+    <!-- onsenui v1.3.11 | Apache License | http://onsen.io/ -->
+    <script src="../js/vendor/onsenui.min.js"></script>
+
+    <script src="../js/controllers/chronic.js"></script>
+    <script src="../js/services/dataservice.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/controllers/detailedHeadacheController.js"></script>
+    <script src="../js/vendor/Chart.min.js"></script>
+    <script src="../js/vendor/angular-chart.js"></script>
+    <script src="../js/cryptojs/SHA3.js"></script>
+
+    <link rel="stylesheet" href="../css/angular-chart.css">
+
+</head>
+
+<body ng-controller="detailedHeadacheController">
+    <div id="loadingImg" style="display: block;">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
+<ons-navigator var="historyNavigator">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button ng-click="transition();" onclick="location.href='history.html'"><i class="fa fa-chevron-left"></i>
+                </ons-toolbar-button>
+            </div>
+            <!--<div class="center" style="margin: 0 auto; text-align: center;">Nieuwe hoofdpijn</div>-->
+            <div class="right">
+                <ons-toolbar-button>
+                    <ons-icon icon="fa fa-pencil" ng-click=";transition();" onclick="location.href='headache.html'"></ons-icon>
+                </ons-toolbar-button>
+                <ons-toolbar-button>
+                    <ons-icon icon="fa  fa-trash-o buttonIcon" ng-click="deleteEntry();"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+        </ons-toolbar>
+
+        <div style="overflow: hidden" class="detailHeadache">
+            <ons-row style="margin-top: 6%;">
+                <div class="label" style="width: 35%;">Starttijd:</div>
+                <div class="label" style="width: 65%;text-align: right">{{startTime}}</div>
+            </ons-row>
+            <ons-row>
+                <div class="label" style="width: 35%;">Eindtijd:</div>
+                <div class="label" style="width: 65%;text-align: right">{{endTime}}</div>
+            </ons-row>
+            <ons-row style="margin-top: 2%;">
+                <div class="list_header">Intensiteitscurve</div>
+            </ons-row>
+            <ons-row style="overflow: hidden">
+                <div style="overflow: hidden;margin:auto;">
+                    <canvas style="position: relative;top: 0;left:0" id="line" class="chart chart-line" chart-data="data"
+                            chart-labels="labels" chart-click="onClick">
+                    </canvas>
+                </div>
+            </ons-row>
+            <ons-row>
+                <div class="detailsList">
+                    <div class="list_header">
+                        Symptomen
+                    </div>
+                    <div ng-repeat="symptom in symptoms" style="margin-top:2%;">
+                        <p>{{symptom}}</p>
+                    </div>
+                    <div class="list_header">
+                        Triggers
+                    </div>
+                    <div ng-repeat="symptom in triggers" style="margin-top:2%;">
+                        <p>{{symptom}}</p>
+                    </div>
+                </div>
+            </ons-row>
+
+        </div>
+    </ons-page>
+</ons-navigator>
+
+</body>
+
+</html>

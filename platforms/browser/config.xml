@@ -1,22 +1,20 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="be.ugent.chronicals" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>chronicals</name>
+<widget id="be.ugent.chronicals" version="1.0.2" versionCode="101" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/3.0">
+    <name>Chronicals</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        A headache diary app
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <icon src="icon.png" />
+    <author>
+        Kiani Lannoye and Gilles Vandewiele
     </author>
-    <content src="index.html" />
+    <allow-navigation href="http://tw06v033.ugent.be/*" />
+    <allow-navigation href="http://*/*" />
+    <access origin="http://localhost/*" />
     <access origin="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
     <gap:plugin source="git" spec="https://github.com/habibillah/cordova-plugin-googleplus.git">
         <param name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf" />
         <param name="WEB_APPLICATION_CLIENT_ID" value="175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf.apps.googleusercontent.com" />
     </gap:plugin>
+    <preference name="orientation" value="portrait" />
 </widget>

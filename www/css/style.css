@@ -1,0 +1,626 @@
+/*!
+ 	Chronicals, v1.0
+ 	Created by Kiani Lannoye & Gilles Vandewiele, commissioned by UZ Ghent
+    https://github.com/kianilannoye/Chronicals
+
+    This file includes all own-made styling.
+ */
+
+/* HTML5 Boilerplate v5.2.0 | MIT License | https://html5boilerplate.com/  */
+@import "main.css";
+@import "normalize.css";
+
+/* onsenui v1.3.11 | Apache License | http://onsen.io/ */
+@import "onsenui.css";
+@import "onsen-css-components-dark-theme.css";
+
+
+html, body{
+	height: 100% !important;
+    background-color: #2c3e50 !important;
+}
+.navigatorTab {
+	text-align: center;
+	width: 100%;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	display: table;
+	table-layout: fixed;
+	margin: 0 auto -5em;
+}
+
+.navigatorTabHead{
+	display: table-row;
+}
+
+.navigatorTabBody{
+	display: table-row;
+}
+
+.navigatorTabFoot{
+	display: table-row;
+}
+
+.hidden{
+    display: none;
+}
+
+.intensitySlider{
+	display: inline-block;
+	overflow: hidden;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-right: 2px;
+	padding-left: 1px;
+	width: auto;
+	min-height: 35px;
+	outline: none;
+	background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cccccc), color-stop(100%, #cccccc));
+	background-position: center;
+	background-size: 99% 4px;
+	background-repeat: no-repeat;
+	-webkit-appearance: none;
+	vertical-align: 25%;
+}
+
+.datePicker{
+	color: black;
+	/*float: right;*/
+	height: 25px;
+	background-color: #1a252f;
+	color: #FFFFFF;
+}
+
+#ownDrug{
+	display: none;
+	margin-left: 5%;
+	background-color: #1a252f;
+    color: #FFFFFF;
+}
+
+.textField{
+    background-color: #1a252f;
+    color: #FFFFFF;
+    width: 90%;
+}
+
+.error{
+	color: red;
+	margin-left: 5%;
+	float: left;
+}
+
+.timePicker{
+	color: black;
+	float: left;
+	height: 25px;
+	background-color: #1a252f;
+	color: #FFFFFF;
+}
+
+input[type=date]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	display: none;
+}
+
+input[type=date]::-webkit-clear-button {
+	-webkit-appearance: none;
+	display: none;
+}
+
+input[type=time]::-webkit-clear-button {
+	-webkit-appearance: none;
+	display: none;
+}
+
+.label{
+	font-weight: bold;
+	font-size: 110%;
+	display: inline-block;
+}
+
+.timeLabel{
+	font-size:100%;
+	margin-top:0px;
+	margin-left: 5%;
+	float: left;
+}
+
+p{
+    font-size: 4vw;
+}
+
+@media all and (max-width: 500px) {
+    p{
+        font-size: 5vw;
+    }
+}
+
+
+@media all and (max-width: 500px) {
+    .button {
+        font-size: 100%;
+        font-size: 4vw;
+    }
+}
+
+.button {
+    width: 30%;
+}
+
+.cancelButton {
+	background: red;
+	float: left;
+}
+
+.skipButton{
+    background: #642EFE;
+}
+
+.cancelButton:active {
+	background: maroon;
+}
+
+.finishButton {
+	background: green;
+}
+
+.finishButton:active {
+	background: olive;
+}
+
+.buttonIcon {
+	font-size: 175%;
+}
+
+.selectDiv {
+    overflow: hidden;
+    background: url('../img/dropdown.png') no-repeat right #FEFEFE;
+    background-color: #1a252f;
+    color: #FFFFFF;
+    border: #ccc 1px solid;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+    padding:0px;
+    position: relative;
+    z-index:100;
+}
+
+.selectDefault {
+    padding-left:10px;
+    background-color: #1a252f;
+    color: #FFFFFF;
+}
+
+.selectDiv select {
+
+    margin:0px;
+    padding:0px;
+    opacity:0;
+    filter:alpha(opacity=0);
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display:block;
+    z-index:101;
+    background-color: #1a252f;
+    color: #FFFFFF;
+}
+
+.selectDiv select:focus {
+    outline: none;
+}
+
+.selectDefault, .selectDiv option {
+    font-family:arial;
+    font-size:12px;
+    background-color: #1a252f;
+    color: #FFFFFF;
+}
+
+.helpIcon{
+	float: right;
+	margin-right: 5%;
+	transform: translateY(50%);
+}
+
+option{
+	background-color: #222;
+	color: #FFFFFF
+}
+
+.medicineQuantity{
+	width: 35%;
+	background-color: #1a252f;
+	color: #FFFFFF;
+}
+
+div.navigatorTabHead > ons-icon{
+    margin: 1% 0 0;
+}
+
+
+/*Dashboard*/
+
+.dashboardPage .page__background {
+    background-color: #2c3e50 !important;
+}
+
+.dashboard{
+	border-color: #01579B;
+	width:100%;
+	height:100%;
+	margin: 0;
+
+}
+
+.dashboard .row{
+	height: 20% !important;
+	width: 100%;
+	margin: 0;
+	text-align: center;
+	align-content: center;
+	border-color: #01579B;
+}
+
+a{
+	text-decoration: none;
+}
+
+.row {
+	margin: 0;
+
+
+}
+.row.stretch{
+	height: 40% !important;
+    width: 100% !important;
+	overflow: hidden;
+	margin:0;
+    margin-top: 3%;
+	padding-right: 2%;
+	padding-left: 2%;
+
+
+
+
+}
+.tileContent.tile.half{
+    height: 95%;
+    margin-bottom: 2% !important;
+
+
+}
+.tileContent{
+    color: #bdc3c7;
+
+
+}
+
+.tileContentInner{
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-55%);
+    -moz-transform: translateY(-55%);
+    -webkit-transform: translateY(-55%);
+    -ms-transform: translateY(-55%);
+}
+
+.tileContentInner > p {
+    margin: 0;
+}
+
+.tile{
+
+	margin-top: 2% !important;
+	/*background-color: #2e2f33;*/
+    background-color: #34495e;
+    border-bottom: 4px solid #1e1f3f;
+}
+
+.tile.half{
+	float: left;
+	width: 47%;
+    margin-top: auto;
+    margin-right: auto;
+    margin-left: 2%;
+    margin-bottom: auto;
+    /*border-left: 4px solid #1e1f3f;*/
+    /*height: 100% !important;*/
+}
+
+div .last{
+	margin-right: 2% !important;
+}
+
+
+.tile.large{
+	width: 100%;
+	height: 98%;
+	margin: 0 !important;
+	padding: 0;
+	align-content: center;
+	text-align: center;
+	display: flex;
+    flex-direction: column;
+    border-bottom: 4px solid #1e1f3f;
+
+    margin-right: 0 !important;
+    overflow: scroll;
+
+}
+
+.tile.large > div {
+    flex: 1;
+    overflow: scroll;
+}
+
+.dashboardlist {
+    height:100%;
+    overflow: scroll;
+}
+
+.row.footer.dashboardFooter{
+	background-color: #01579B;
+    width: 96%;
+    margin-left: 2%;
+    margin-right: auto;
+    margin-top: 3%;
+    height: 15% !important;
+}
+
+#midTile{
+    height: 90%;
+}
+
+.dashboardMidIcon{
+    height: 20%;
+}
+
+.dashboard i.icon{
+	font-size: 220%;
+}
+
+.tileContent > .fa-calendar-check-o{
+
+	margin-top: 3%;
+}
+
+.dashboard .fa {
+	margin-top: 8%;
+}
+
+
+.row.footer.dashboardFooter p{
+	text-align: center;
+	margin: auto;
+}
+
+.dates {
+	width: 80%;
+	margin-top: 8%;
+	margin-right: 0;
+	margin-left: 2%;
+	text-align: left;
+	font-size: 120%;
+
+}
+
+.intensities{
+	width: 15%;
+	margin-top: 8%;
+	margin-right: 1%;
+	margin-left: 0%;
+	font-size: 120%;
+}
+
+
+
+/* -------------History CSS
+*/
+
+.list_item{
+    height: 44px;
+}
+
+.list-left{
+	width: 15%;
+	display: inline-block;
+    font-size: 180%;
+    height: 40px;
+}
+
+.list-center{
+	width: 53%;
+	display: inline-block;
+    text-align: center;
+    height: 40px;
+}
+
+.list-right{
+	width: 25%;
+    text-align: center;
+    margin-right: 10px;
+	display: inline-block;
+    height: 40px;
+}
+
+.headache{
+    color: #f9332f;
+}
+
+.medicine{
+    color: #0cc80c;
+}
+/* Calendar style */
+.fc-today{
+    background-color: #888888 !important;
+}
+
+.left{
+    width: 30%;
+}
+
+.center{
+    width: 40%;
+    text-align: center;
+}
+
+.right{
+    width: 30%;
+}
+
+#calendar h2{
+    font-size: large;
+    vertical-align: middle;
+}
+
+/* calendar buttons*/
+.fc button {
+    -moz-box-shadow:inset 0px 0px 0px 0px #54a3f7;
+    -webkit-box-shadow:inset 0px 0px 0px 0px #54a3f7;
+    box-shadow:inset 0px 0px 0px 0px #54a3f7;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #007dc1), color-stop(1, #0061a7));
+    background:-moz-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+    background:-webkit-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+    background:-o-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+    background:-ms-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+    background:linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#007dc1', endColorstr='#0061a7',GradientType=0);
+    background-color:#007dc1;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+    border:1px solid #124d77;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    padding:6px 8px;
+    text-decoration:none;
+    text-shadow:0px 0px 0px #154682;
+}
+.fc button:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0061a7), color-stop(1, #007dc1));
+    background:-moz-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+    background:-webkit-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+    background:-o-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+    background:-ms-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+    background:linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0061a7', endColorstr='#007dc1',GradientType=0);
+    background-color:#0061a7;
+}
+.fc button:active {
+    position:relative;
+    top:1px;
+    background: none;
+    background-color: #01579B;
+}
+
+#calendar button.fc-button.fc-state-default.fc-state-active{
+    border: none;
+    background: none;
+    background-color: #01579B;
+}
+
+/*loading animation*/
+.spinner {
+    width: 40px;
+    height: 40px;
+
+    position: relative;
+    margin: 100px auto;
+}
+
+.double-bounce1, .double-bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #01579B;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+    0%, 100% { -webkit-transform: scale(0.0) }
+    50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+    0%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    } 50% {
+          transform: scale(1.0);
+          -webkit-transform: scale(1.0);
+      }
+}
+
+/*Details page*/
+.detailHeadache{
+    height: 100%;
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+    overflow: scroll;
+}
+
+.detailsList{
+    width: 100%;
+}
+
+.symptomDuration{
+    margin-left: 35%;
+    width: 30%;
+}
+
+.list_header{
+    background-color: #1a252f;
+    width: 100%;
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.list_separator {
+    background-color: #1a252f;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.detailMedicine > .tekstLijn{
+    margin-left: 3%;
+    margin-right: 3%;
+    width: 94%;
+
+}
+
+.toolbar-button > ons-icon{
+    margin: 0;
+}
+
+.listitem:active{
+    background-color: white;
+    -webkit-tap-highlight-color: #FFFFFF;
+    -webkit-tap-highlight-color: #FFFFFF; /* For some Androids */
+}
+
+#diaryForm {
+    margin-top: 10%;
+}

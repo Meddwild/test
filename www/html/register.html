@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app="Chronic">
+<head>
+    <meta charset="UTF-8">
+
+
+    <title>Geen naam</title>
+
+    <!-- Our style sheet -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/login.css">
+
+    <script type="text/javascript" src="../cordova.js"></script>
+    <!-- AngularJS + ngStorage | MIT License | https://angularjs.org/ -->
+    <script src="../js/angular/angular.js"></script>
+    <script src="../js/angular/ngStorage.min.js"></script>
+
+    <!-- onsenui v1.3.11 | Apache License | http://onsen.io/ -->
+    <script src="../js/vendor/onsenui.min.js"></script>
+
+    <!-- jQuery | MIT License | https://jquery.org/ -->
+    <script src="../js/vendor/jquery-2.1.4.js"></script>
+
+    <!-- Main file & Headache controller -->
+    <script src="../js/controllers/chronic.js"></script>
+    <!--/*Dataservice VOOR de controller-->
+    <script src="../js/index.js"></script>
+    <script src="../js/services/backgroundservice.js"></script>
+    <script src="../js/services/dataservice.js"></script>
+    <script src="../js/cryptojs/SHA3.js"></script>
+
+    <script src="../js/controllers/registerController.js"></script>
+    <script src="../js/vendor/Chart.min.js"></script>
+    <script src="../js/vendor/angular-chart.js"></script>
+
+
+</head>
+<body class="align" ng-controller="registerController">
+<div id="loadingImg" style="display: block;">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+<div class="site__container">
+
+    <div class="grid__container">
+
+        <form ng-submit="submitRegister()" method="post" class="form form--login" name="registerForm">
+
+            <div class="form__field">
+                <label class="fontawesome-user" style="width: 110px; padding-left: 5px; padding-right: 0px;"
+                       for="register__firstname"> <span class="hidden">Voornaam (*)</span></label>
+                <input id="register__firstname" ng-model="firstname" type="text" class="form__input"
+                       placeholder="Voornaam" required>
+            </div>
+
+            <div class="form__field">
+                <label class="fontawesome-user" style="width: 110px; padding-left: 5px; padding-right: 0px;"
+                       for="register__lastname"> <span class="hidden">Achternaam (*)</span></label>
+                <input id="register__lastname" ng-model="lastname" type="text" class="form__input"
+                       placeholder="Achternaam" required>
+            </div>
+
+            <div class="form__field">
+                <label class="fontawesome-calendar" style="width: 110px; padding-left: 5px; padding-right: 0px;"
+                       for="register__birthdate"> <span class="hidden">Geboorte (*)</span></label>
+                <input id="register__birthdate" ng-model="birthdate" type="date" min="1900-01-01" max="2050-01-01"
+                       class="form__input" placeholder="Last name" required>
+            </div>
+
+            <div class="form__field">
+                <label class="fa fa-venus-mars" style="width: 110px; padding-left: 5px; padding-right: 0px;"
+                       for="register__sex"> <span class="hidden">Geslacht</span></label>
+                <select style="width: 100%; border-color: #3b4148" id="register__sex" ng-model="sex" class="form__input"
+                        required>
+                    <option value="Man">Man</option>
+                    <option value="Vrouw">Vrouw</option>
+                </select>
+            </div>
+
+
+            <div class="form__field">
+                <label class="fontawesome-hand-up" style="width: 110px; padding-left: 5px; padding-right: 0px;"
+                       for="register__married"> <span class="hidden">Status</span></label>
+                <select style="width: 100%; border-color: #3b4148" id="register__married" ng-model="status"
+                        class="form__input" required>
+                    <option value="Getrouwd">Getrouwd</option>
+                    <option value="In relatie">In relatie</option>
+                    <option value="Vrijgezel">Vrijgezel</option>
+                </select>
+            </div>
+
+            <div class="form__field">
+                <label class="fa fa-briefcase" style="width: 110px; padding-left: 5px; padding-right: 0px;"
+                       for="register__employment"> <span class="hidden">Werkstatus</span></label>
+                <select style="width: 100%; border-color: #3b4148" id="register__employment" ng-model="employment"
+                        class="form__input" required>
+                    <option value="Werkende">Werkende</option>
+                    <option value="Niet-werkende">Niet-werkende</option>
+                </select>
+            </div>
+
+            <div class="form__field">
+                <label class="fontawesome-envelope" style="width: 80px; padding-left: 10px; padding-right: 10px;"
+                       for="login__username"> <span class="hidden">Email (*)</span></label>
+                <input id="login__username" ng-model="email" type="email" class="form__input" placeholder="email"
+                       required>
+            </div>
+
+            <div class="form__field">
+                <label class="fontawesome-lock" style="width: 80px; padding-left: 10px; padding-right: 10px;"
+                       for="login__password"> <span class="hidden">Pin (*)</span></label>
+                <input id="login__password" type="password" ng-model="password" class="form__input"
+                       placeholder="Paswoord" required pattern="[0-9]*" inputmode="numeric">
+            </div>
+
+            <div class="form__field">
+                <label class="fontawesome-lock" style="width: 80px; padding-left: 10px; padding-right: 10px;"
+                       for="hospitalCode"> <span class="hidden">UZ Code (*)</span></label>
+                <input id="hospitalCode" name="hospitalCode" type="text" ng-model="currentCode" class="form__input"
+                       placeholder="Code" required pattern="[A-z0-9]*">
+             </div>
+
+            <div style="width: 100%; margin: 0 auto;">
+                <span ng-show="registerForm.hospitalCode.$touched && registerForm.hospitalCode.$invalid" style="width: 100%; color:red; margin-bottom: 5%; display: inline-block; text-align: center; font-size: 15px;">U moet een code ingeven</span>
+                <span ng-show="!checkCode()" style="width: 100%; color:red; margin-bottom: 5%; display: inline-block; text-align: center; font-size: 15px;">Foute UZ code</span>
+            </div>
+
+
+
+            <div class="form__field">
+                <ons-button type="submit" ng-click='submitRegister()' ng-disabled="!checkCode() || registerForm.hospitalCode.$invalid" style="width:100%; text-align: center;"/> Registreer </ons-button>
+                <!--  <button type="submit" style="background-color: #154682; color: #eee; font-weight: bold; text-transform: uppercase;" ng-disabled="(registerForm.hospitalCode.$touched && registerForm.hospitalCode.$invalid)"> Log in </button> -->
+            </div>
+
+        </form>
+
+        <p class="text--center">Al een account? <a href="login.html">Log in</a> <span
+            class="fontawesome-arrow-right"></span></p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

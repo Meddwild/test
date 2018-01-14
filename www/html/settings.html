@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" ng-app="Chronic">
+<head>
+    <meta charset="utf-8">
+
+    <title>Details</title>
+    <script src="../cordova.js"></script>
+    <!-- Our style sheet -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- AngularJS | MIT License | https://angularjs.org/ -->
+    <script src="../js/angular/angular.js"></script>
+    <script src="../js/angular/ngStorage.min.js"></script>
+
+    <!-- jQuery | MIT License | https://jquery.org/ -->
+    <script src="../js/vendor/jquery-2.1.4.js"></script>
+
+    <!-- onsenui v1.3.11 | Apache License | http://onsen.io/ -->
+    <script src="../js/vendor/onsenui.min.js"></script>
+
+    <script src="../js/controllers/chronic.js"></script>
+    <script src="../js/services/backgroundservice.js"></script>
+    <script src="../js/services/dataservice.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/controllers/settingsController.js"></script>
+    <script src="../js/vendor/Chart.min.js"></script>
+    <script src="../js/vendor/angular-chart.js"></script>
+
+    <link rel="stylesheet" href="../css/angular-chart.css">
+
+</head>
+
+<body ng-controller="settingsController">
+<div id="loadingImg" style="display: block;">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+<ons-navigator var="settingsNavigator">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><i class="fa fa-chevron-left"></i>
+
+                </ons-toolbar-button>
+            </div>
+            <div class="right"><ons-toolbar-button ng-click="settingsNavigator.pushPage('manualSettings.html');"><ons-icon icon="ion-help" style="font-size: 100%;"></ons-icon></ons-toolbar-button></div>
+            <!--<div class="center" style="margin: 0 auto; text-align: center;">Nieuwe hoofdpijn</div>-->
+            <!--<div class="right">-->
+                <!-- -->
+            <!--</div>-->
+        </ons-toolbar>
+
+        <div class="settings">
+            <ons-list>
+                <ons-list-header>Data & Cache</ons-list-header>
+                <ons-list-item class="list__item list__item--tappable" ng-click="clearCache()">Clear Cache</ons-list-item>
+                <ons-list-header>Profiel</ons-list-header>
+                <ons-list-item onclick="location.href='profile.html'">Profielpagina</ons-list-item>
+                <ons-list-header>Applicatie</ons-list-header>
+                <ons-list-item onclick="location.href='manual.html'">Handleiding</ons-list-item>
+                <ons-list-header>GPS locatie</ons-list-header>
+                <ons-list-item class="list__item list__item--tappable" ng-click="stopGPSLocationTracking()">Stop GPS tracking</ons-list-item>
+            </ons-list>
+
+
+
+        </div>
+
+
+    </ons-page>
+</ons-navigator>
+
+<script type="text/ons-template" id="manualSettings.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left"><ons-toolbar-button ng-click="settingsNavigator.popPage()"><ons-icon icon="ion-ios-arrow-back" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="center" style="margin: 0 auto; text-align: center;"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-home" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="right"></div>
+        </ons-toolbar>
+        <div style="text-align: center; margin-top: 5%;">
+            <div><h2>Settings</h2></div>
+            <hr>
+        </div>
+
+        <div style="margin-left: 2%; margin-right: 2%;text-align: justify">
+            <p>Op deze pagina kunt vindt u opties in verband met de data van de app, uw dagelijkse inname van medicijnen en de handleiding zelf</p>
+            <br/>
+            <p>De optie clear cache dient om de geregistreerde informatie LOKAAL te verwijderen.</p>
+            <br/>
+            <p>Op de profielpagina van de app kunt u de medicatie instellen die u dagelijks inneemt.</p>
+        </div>
+    </ons-page>
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" ng-app="Chronic">
+<head>
+    <meta charset="utf-8">
+
+    <title>Geen naam</title>
+
+    <!--<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">-->
+
+
+    <!-- Our style sheet -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <script src="../cordova.js"></script>
+    <!-- AngularJS + ngStorage | MIT License | https://angularjs.org/ -->
+    <script src="../js/angular/angular.js"></script>
+    <script src="../js/angular/ngStorage.min.js"></script>
+
+    <!-- jQuery | MIT License | https://jquery.org/ -->
+    <script src="../js/vendor/jquery-2.1.4.js"></script>
+
+
+    <!-- onsenui v1.3.11 | Apache License | http://onsen.io/ -->
+    <script src="../js/vendor/onsenui.min.js"></script>
+
+    <!-- Main file & Dashboard controller -->
+    <script src="../js/controllers/chronic.js"></script>
+    <script src="../js/services/dataservice.js"></script>
+    <script src="../js/controllers/adviceController.js"></script>
+    <script src="../js/vendor/Chart.min.js"></script>
+    <script src="../js/vendor/angular-chart.js"></script>
+    <script src="../js/cryptojs/SHA3.js"></script>
+    <script src="../js/index.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    </script>
+
+</head>
+
+<body ng-controller="adviceController">
+
+    <div id="loadingImg" style="display: block;">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
+
+
+    <ons-navigator var="myNavigator" class="hidden">
+        <!-- Intensity page -->
+        <ons-page id="advice.html">
+            <ons-toolbar>
+                <div class="left"><ons-toolbar-button onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-arrow-back" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+                <div class="center" style="margin: 0 auto; text-align: center;"></div>
+                <div class="right"><ons-toolbar-button ng-click="myNavigator.pushPage('manualAdvies.html');"><ons-icon icon="ion-help" style="font-size: 100%;"></ons-icon></ons-toolbar-button></div>
+            </ons-toolbar>
+
+            <div class="navigatorTab">
+
+                <ons-icon icon="fa-info-circle" style="font-size: 250%; margin-bottom: 5%; margin-top: 5%;"></ons-icon> <br>
+                <div ng-if="advice != ''">
+                    <p class="label">{{advice}}</p>
+                </div>
+                <div ng-if="advice == ''">
+                    <p class="label">U heeft nog geen advies ontvangen</p>
+                </div>
+
+            </div>
+        </ons-page>
+    </ons-navigator>
+
+    <script type="text/ons-template" id="manualAdvies.html">
+        <ons-page>
+            <ons-toolbar>
+                <div class="left"><ons-toolbar-button ng-click="myNavigator.popPage()"><ons-icon icon="ion-ios-arrow-back" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+                <div class="center" style="margin: 0 auto; text-align: center;"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-home" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+                <div class="right"></div>
+            </ons-toolbar>
+            <div style="text-align: center; margin-top: 5%;">
+                <div><h2>Advies</h2></div>
+                <hr>
+            </div>
+
+            <div style="margin-left: 2%; margin-right: 2%;text-align: justify">
+                <p>Op deze pagina kunt u het advies lezen over de behandeling die de dokter voorschrijft. Dit betreft het innemen van medicatie, het vermijden van triggers en meer.</p>
+                <br/>
+            </div>
+        </ons-page>
+    </script>
+</body>
+</html>
