@@ -12,9 +12,5 @@
     <allow-navigation href="http://*/*" />
     <access origin="http://localhost/*" />
     <access origin="*" />
-    <gap:plugin source="git" spec="https://github.com/habibillah/cordova-plugin-googleplus.git">
-        <param name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf" />
-        <param name="WEB_APPLICATION_CLIENT_ID" value="175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf.apps.googleusercontent.com" />
-    </gap:plugin>
     <preference name="orientation" value="portrait" />
 </widget>
