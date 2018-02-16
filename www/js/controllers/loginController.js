@@ -120,6 +120,7 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
 
 
             var user = data;
+            console.log(user);
             dataService.setAdvice(data.advice);
             dataService.registerUser(user.firstName, user.lastName, user.birthDate, user.isMale, user.relation, user.isEmployed, $scope.email.toLowerCase(), sha3_512($scope.password), user.patientID);
             dataService.sendNewHeadachesToDB();
@@ -141,11 +142,10 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
                     alert("Er is een nieuwe versie beschikbaar op https://build.phonegap.com/apps/1669916/builds");
                 }
             }, function (data, status, headers, config) {
-                alert("Er is een fout opgetreden... " + status + "\n" + data)
+                alert("Er is een fout opgetreden... ");
             });
 
         }).error(function (data, status, headers, config) {
-            alert("Er is een fout opgetreden... " + status + "\n" + data)
             if (status == 0) {
                 alert("U bent niet verbonden met het internet, of de server is offline. U werkt nu verder met lokale gegevens tot u opnieuw verbinding met de server heeft ");
                 if (dataService.getCurrentUser() == null || dataService.getCurrentUser().passwordHash == null || dataService.getCurrentUser().passwordHash.length < 1) {
@@ -159,7 +159,7 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
                     }
                 }
             } else {
-                alert("Er is een fout opgetreden... " + status + "\n" + data)
+                alert("Er is een fout opgetreden, probeer opnieuw... " + status)
             }
         });
     };

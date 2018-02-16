@@ -89,17 +89,17 @@
             </div>
 
             <ons-row>
-                <p class="label list_separator">Om hoe laat ging u slapen, en hoe lang heeft u geslapen?</p>
+                <p class="label list_separator">Om hoe laat ging u slapen, en hoe laat werd u wakker?</p>
             </ons-row>
 
             <div class="form__field">
-                <label class="fontawesome-time" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_bedTime"> <span class="hidden">Bedtijd</span></label>
-                <input id="daily_bedTime" ng-model="data.bedTime" type="time" class="form__input" placeholder="{{data.bedTime}}">
+                <label class="fontawesome-time" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_beginSleep"> <span class="hidden">Bedtijd</span></label>
+                <input id="daily_beginSleep" ng-model="data.beginSleep" type="time" class="form__input" placeholder="{{data.beginSleep}}">
             </div>
 
             <div class="form__field">
-                <label class="fontawesome-time" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_sleep"> <span class="hidden">Slaap</span></label>
-                <input id="daily_sleep" ng-model="data.sleepHours" type="time" class="form__input" step="60" placeholder="{{data.sleepHours}}">
+                <label class="fontawesome-time" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_endSleep"> <span class="hidden">Opstaan</span></label>
+                <input id="daily_endSleep" ng-model="data.endSleep" type="time" class="form__input" step="60" placeholder="{{data.endSleep}}">
             </div>
 
             <ons-row>
@@ -107,7 +107,7 @@
             </ons-row>
 
             <div class="form__field">
-                <label class="fontawesome-glass" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_alcohol"> <span class="hidden">Alcohol</span></label>
+                <label class="fontawesome-glass" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_alcohol"> <span class="hidden">Alcohol</span> <span class="fontawesome-question-sign"></span></label>
                 <input id="daily_alcohol" ng-model="data.alcohol" type="number" class="form__input" placeholder="{{data.alcohol}}" min="0" max="20">
             </div>
 

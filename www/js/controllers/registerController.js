@@ -86,7 +86,7 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
             "diagnosis": ""
         };
 
-        $http.put('http://tw06v033.ugent.be/Chronic/rest/PatientService/patients', JSON.stringify(user), {
+        $http.put('http://tw06v033.ugent.be/Chronic1/rest/PatientService/patients', JSON.stringify(user), {
             headers: {
                 'Content-Type': 'application/json'
             }

@@ -9,6 +9,14 @@
         "parents": {
           "/*": [
             {
+              "xml": "<feature name=\"GooglePlus\"><param name=\"android-package\" value=\"nl.xservices.plugins.GooglePlus\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<access origin=\"https://accounts.google.com/*\" />",
+              "count": 1
+            },
+            {
               "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
               "count": 1
             },
@@ -27,14 +35,6 @@
             {
               "xml": "<feature name=\"BackgroundGeolocation\"><param name=\"android-package\" value=\"com.tenforwardconsulting.cordova.BackgroundGeolocationPlugin\" /></feature>",
               "count": 1
-            },
-            {
-              "xml": "<feature name=\"GooglePlus\"><param name=\"android-package\" value=\"nl.xservices.plugins.GooglePlus\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
-            },
-            {
-              "xml": "<access origin=\"https://accounts.google.com/*\" />",
-              "count": 1
             }
           ]
         }
@@ -45,6 +45,10 @@
             {
               "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
               "count": 2
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.USE_CREDENTIALS\" />",
+              "count": 1
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.WAKE_LOCK\" />",
@@ -92,10 +96,6 @@
             },
             {
               "xml": "<uses-permission android:name=\"android.hardware.location\" />",
-              "count": 1
-            },
-            {
-              "xml": "<uses-permission android:name=\"android.permission.USE_CREDENTIALS\" />",
               "count": 1
             }
           ],
@@ -204,6 +204,9 @@
     }
   },
   "installed_plugins": {
+    "cordova-plugin-googleplus": {
+      "PACKAGE_NAME": "be.ugent.chronicals"
+    },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "be.ugent.chronicals"
     },
@@ -225,13 +228,18 @@
       "ACCOUNT_TYPE": "$PACKAGE_NAME.account",
       "CONTENT_AUTHORITY": "$PACKAGE_NAME",
       "PACKAGE_NAME": "be.ugent.chronicals"
-    },
-    "cordova-plugin-googleplus": {
-      "PACKAGE_NAME": "be.ugent.chronicals"
     }
   },
   "dependent_plugins": {},
   "modules": [
+    {
+      "id": "cordova-plugin-googleplus.GooglePlus",
+      "file": "plugins/cordova-plugin-googleplus/www/GooglePlus.js",
+      "pluginId": "cordova-plugin-googleplus",
+      "clobbers": [
+        "window.plugins.googleplus"
+      ]
+    },
     {
       "id": "cordova-plugin-device.device",
       "file": "plugins/cordova-plugin-device/www/device.js",
@@ -281,22 +289,14 @@
       "clobbers": [
         "backgroundGeolocation"
       ]
-    },
-    {
-      "id": "cordova-plugin-googleplus.GooglePlus",
-      "file": "plugins/cordova-plugin-googleplus/www/GooglePlus.js",
-      "pluginId": "cordova-plugin-googleplus",
-      "clobbers": [
-        "window.plugins.googleplus"
-      ]
     }
   ],
   "plugin_metadata": {
+    "cordova-plugin-googleplus": "5.1.1",
     "cordova-plugin-whitelist": "1.3.3",
-    "cordova-plugin-device": "2.0.1",
-    "cordova-plugin-badge": "0.8.6",
-    "cordova-plugin-local-notification": "0.9.0-beta.2",
-    "cordova-plugin-mauron85-background-geolocation": "2.3.3",
-    "cordova-plugin-googleplus": "5.2.1"
+    "cordova-plugin-device": "1.1.7",
+    "cordova-plugin-badge": "0.8.5",
+    "cordova-plugin-local-notification": "0.9.0-beta.1",
+    "cordova-plugin-mauron85-background-geolocation": "2.3.3"
   }
 }

@@ -1,6 +1,22 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
+        "file": "plugins/cordova-plugin-googleplus/www/GooglePlus.js",
+        "id": "cordova-plugin-googleplus.GooglePlus",
+        "pluginId": "cordova-plugin-googleplus",
+        "clobbers": [
+            "window.plugins.googleplus"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-googleplus/src/browser/GooglePlusProxy.js",
+        "id": "cordova-plugin-googleplus.GooglePlusProxy",
+        "pluginId": "cordova-plugin-googleplus",
+        "clobbers": [
+            "GooglePlus"
+        ]
+    },
+    {
         "file": "plugins/cordova-plugin-device/www/device.js",
         "id": "cordova-plugin-device.device",
         "pluginId": "cordova-plugin-device",
@@ -69,25 +85,17 @@ module.exports = [
         "clobbers": [
             "backgroundGeolocation"
         ]
-    },
-    {
-        "file": "plugins/cordova-plugin-googleplus/www/GooglePlus.js",
-        "id": "cordova-plugin-googleplus.GooglePlus",
-        "pluginId": "cordova-plugin-googleplus",
-        "clobbers": [
-            "window.plugins.googleplus"
-        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
+    "cordova-plugin-googleplus": "5.1.1",
     "cordova-plugin-whitelist": "1.3.3",
-    "cordova-plugin-device": "2.0.1",
-    "cordova-plugin-badge": "0.8.6",
-    "cordova-plugin-local-notification": "0.9.0-beta.2",
-    "cordova-plugin-mauron85-background-geolocation": "2.3.3",
-    "cordova-plugin-googleplus": "5.2.1"
+    "cordova-plugin-device": "1.1.7",
+    "cordova-plugin-badge": "0.8.5",
+    "cordova-plugin-local-notification": "0.9.0-beta.1",
+    "cordova-plugin-mauron85-background-geolocation": "2.3.3"
 }
 // BOTTOM OF METADATA
 });

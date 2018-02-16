@@ -44,14 +44,18 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         return false;
     };
 
+    $scope.showACTInfo = function() {
+        alert(" Alcohol: Aantal glazen bier van 25 cl \n Koffie: Aantal koppen van 20 cl \n Tabak: Aantal sigaretten");
+    }
+
     var datum = new Date();
     $scope.city = "Gent";
     $scope.sportHours = new Date(datum.setHours(00,30,0,0));
-    $scope.sleepHours = new Date(datum.setHours(6,30,0,0));
+    $scope.endSleep = new Date(datum.setHours(6,30,0,0));
     $scope.breakfastTime = new Date(datum.setHours(8,30,0,0));
     $scope.lunchTime = new Date(datum.setHours(12,0,0,0));
     $scope.dinnerTime = new Date(datum.setHours(18,30,0,0));
-    $scope.bedTime = new Date(datum.setHours(22,30,0,0));
+    $scope.beginSleep = new Date(datum.setHours(22,30,0,0));
     $scope.alcohol = 0;
     $scope.cafeine = 0;
     $scope.tobacco = 0;
@@ -61,7 +65,7 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
 
     $scope.submitDailyLife = function () {
 
-        dataService.setDailyLife($scope.city, $scope.sportHours, $scope.sleepHours, $scope.bedTime, $scope.alcohol, $scope.tobacco, $scope.cafeine, $scope.breakfastTime, $scope.lunchTime, $scope.dinnerTime, $scope.depression, $scope.menstruationDate, $scope.menstruationDuration);
+        dataService.setDailyLife($scope.city, $scope.sportHours, $scope.endSleep, $scope.beginSleep, $scope.alcohol, $scope.tobacco, $scope.cafeine, $scope.breakfastTime, $scope.lunchTime, $scope.dinnerTime, $scope.depression, $scope.menstruationDate, $scope.menstruationDuration);
 
         // update user with dailylife
         var user = {
@@ -78,8 +82,8 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
             "patientID": $scope.user.patientID,
             "city": $scope.city,
             "sportHours": $scope.sportHours,
-            "sleepHours": $scope.sleepHours,
-            "bedTime": $scope.bedTime,
+            "endSleep": $scope.endSleep,
+            "beginSleep": $scope.beginSleep,
             "alcohol": $scope.alcohol,
             "tobacco": $scope.tobacco,
             "cafeine": $scope.cafeine,
@@ -90,6 +94,10 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
             "menstruationDate": $scope.menstruationDate,
             "menstruationDuration": $scope.menstruationDuration
         };
+
+        console.log(JSON.stringify(user));
+
+
         $http.post('http://tw06v033.ugent.be/Chronic1/rest/PatientService/patients/update', JSON.stringify(user), {
             headers: {
                 'Content-Type': 'application/json',
@@ -97,7 +105,7 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
             }
         }).
         success(function (data, status, headers, config) {
-            location.href = "dashboard.html";
+            // location.href = "dashboard.html";
         }).
         error(function (data, status, headers, config) {
             $scope.foutmelding = "Geen verbinding met de REST service";
@@ -105,10 +113,5 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
             console.log(data);
             $('.error').show();
         });
-
-
-
-
-
     };
 });

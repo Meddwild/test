@@ -776,9 +776,9 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         return JSON.parse(localStorage.getItem("googleResponse"));
     }
 
-    var setDailyLife = function (_city, _sportHours, _sleepHours, _bedTime, _alcohol, _tobacco, _cafeine, _breakfastTime, _lunchTime, _dinnerTime, _depression, _menstruationDate, _menstruationDuration) {
+    var setDailyLife = function (_city, _sportHours, _endSleep, _beginSleep, _alcohol, _tobacco, _cafeine, _breakfastTime, _lunchTime, _dinnerTime, _depression, _menstruationDate, _menstruationDuration) {
         var dailyLife = {
-            city: _city, sportHours: _sportHours, sleepHours: _sleepHours, bedTime: _bedTime, alcohol: _alcohol,
+            city: _city, sportHours: _sportHours, endSleep: _endSleep, beginSleep: _beginSleep, alcohol: _alcohol,
             tobacco: _tobacco, cafeine: _cafeine, breakfastTime: _breakfastTime, lunchTime: _lunchTime, dinnerTime: _dinnerTime, depression: _depression,
             menstruationDate: _menstruationDate, menstruationDuration: _menstruationDuration
         };
@@ -819,11 +819,13 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         if(diaries == null || Object.keys(diaries).length <1){
             console.log("no new diary entries");
         } else{
-            // send diaries from the last two weeks to db (users might correct mistakes and such)
+            // send diaries from the last week to db (users might correct mistakes and such)
             for (var diarydate in diaries){
-                diff = Date.now() - Date.parse(diarydate);
-                // 1209600000 = 2 weeks in milliseconds
-                if(diff < 1209600000) {
+                var now = moment();
+                var dateB = moment(diarydate, "DD/MM/YYYY");
+                diff = now.diff(dateB, "day");
+
+                if(diff < 7) {
                     sendDiaryToDB(diaries[diarydate]).then(function(result){
                         console.log("success");
                     }, function(result){
@@ -841,12 +843,13 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         // for (i = 0; i < locations.length; i++) {
         //     sendLocationToDB(locations[i]);
         // }
-        sendBulkLocationsToDB(locations).then(function(result){
-            backgroundservice.deleteHistory();
-        }, function(result){
-            console.log("fout bij het versturen van de locaties");
-        });
-        //
+        if (locations !== null ) {
+            sendBulkLocationsToDB(locations).then(function(result){
+                backgroundservice.deleteHistory();
+            }, function(result){
+                console.log("fout bij het versturen van de locaties");
+            });
+        }
 
     };
 

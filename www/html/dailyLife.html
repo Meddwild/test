@@ -88,21 +88,23 @@
             </div>
 
             <ons-row>
-                <p class="label list_header">Om hoe laat gaat u slapen, en hoe lang slaapt u?</p>
+                <p class="label list_header">Om hoe laat gaat u slapen, en hoe laat wordt u wakker?</p>
             </ons-row>
 
             <div class="form__field">
-                <label class="fontawesome-time" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_bedTime"> <span class="hidden">Bedtijd</span></label>
-                <input id="daily_bedTime" ng-model="bedTime" type="time" class="form__input" placeholder="{{bedTime}}">
+                <label class="fontawesome-time" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_beginSleep"> <span class="hidden">Bedtijd</span></label>
+                <input id="daily_beginSleep" ng-model="beginSleep" type="time" class="form__input" placeholder="{{beginSleep}}">
             </div>
 
             <div class="form__field">
-                <label class="fontawesome-time" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_sleep"> <span class="hidden">Slaap</span></label>
-                <input id="daily_sleep" ng-model="sleepHours" type="time" class="form__input" step="60" placeholder="{{sleepHours}}">
+                <label class="fontawesome-time" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_endSleep"> <span class="hidden">Opstaan</span></label>
+                <input id="daily_endSleep" ng-model="endSleep" type="time" class="form__input" step="60" placeholder="{{endSleep}}">
             </div>
 
-            <ons-row>
-                <p class="label list_header">Hoe veel porties van de volgende middelen gebruikt u wekelijks?</p>
+            <ons-row class="list_header">
+                <ons-col >Hoe veel porties van de volgende middelen gebruikt u wekelijks?</ons-col>
+                <ons-col width="50px" ng-click="showACTInfo()"><ons-icon width="50px" height="100px" icon="fa-question-circle"></ons-icon></ons-col>
+                <!--<p class="label list_header">Hoe veel porties van de volgende middelen gebruikt u wekelijks? <span class="fontawesome-question-sign"></p>-->
             </ons-row>
 
             <div class="form__field">

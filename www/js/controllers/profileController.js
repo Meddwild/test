@@ -86,7 +86,7 @@ angular.module('Chronic').controller('profileController', function($scope, dataS
                 $scope.foutmelding = "Uw oude PIN is incorrect of uw nieuwe PIN codes komen niet overeen";
                 $('.error').show();
             } else {
-                $scope.user = {
+                user = {
                     "firstName": $scope.user.firstname,
                     "lastName": $scope.user.lastname,
                     "birthDate": $scope.data.birthdate,
@@ -109,7 +109,7 @@ angular.module('Chronic').controller('profileController', function($scope, dataS
                     "lunchtime": $scope.data.lunchTime,
                     "dinnerTime": $scope.data.dinnerTime
                 };
-                $http.post('http://tw06v033.ugent.be/Chronic/rest/PatientService/patients/update', JSON.stringify(user), {
+                $http.post('http://tw06v033.ugent.be/Chronic1/rest/PatientService/patients/update', JSON.stringify(user), {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': dataService.getAuthorization()
@@ -133,7 +133,7 @@ angular.module('Chronic').controller('profileController', function($scope, dataS
             $('.error').show();
         }
         else {
-            $scope.user = {
+            user = {
                 "firstName": $scope.user.firstname,
                 "lastName": $scope.user.lastname,
                 "birthDate": $scope.data.birthdate,
@@ -157,7 +157,7 @@ angular.module('Chronic').controller('profileController', function($scope, dataS
                 "dinnerTime": $scope.data.dinnerTime
             };
             dataService.setDailyLife(user.city,user.sportHours, user.sleepHours, user.bedTime, user.alcohol, user.tobacco, user.cafeine,user.breakfastTime, user.lunchtime, user.dinnerTime);
-            $http.post('http://tw06v033.ugent.be/Chronic/rest/PatientService/patients/update', JSON.stringify(user), {
+            $http.post('http://tw06v033.ugent.be/Chronic1/rest/PatientService/patients/update', JSON.stringify(user), {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': dataService.getAuthorization()

@@ -1,5 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="be.ugent.chronicals" version="1.0.2" versionCode="101" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/3.0">
+    <feature name="GooglePlus">
+        <param name="android-package" value="nl.xservices.plugins.GooglePlus" />
+        <param name="onload" value="true" />
+    </feature>
+    <access origin="https://accounts.google.com/*" />
     <feature name="Whitelist">
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
@@ -16,11 +21,6 @@
     <feature name="BackgroundGeolocation">
         <param name="android-package" value="com.tenforwardconsulting.cordova.BackgroundGeolocationPlugin" />
     </feature>
-    <feature name="GooglePlus">
-        <param name="android-package" value="nl.xservices.plugins.GooglePlus" />
-        <param name="onload" value="true" />
-    </feature>
-    <access origin="https://accounts.google.com/*" />
     <name>Chronicals</name>
     <description>
         A headache diary app
@@ -33,6 +33,10 @@
     <allow-navigation href="http://*/*" />
     <access origin="http://localhost/*" />
     <access origin="*" />
+    <gap:plugin source="git" spec="https://github.com/habibillah/cordova-plugin-googleplus.git">
+        <param name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf" />
+        <param name="WEB_APPLICATION_CLIENT_ID" value="175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf.apps.googleusercontent.com" />
+    </gap:plugin>
     <preference name="loglevel" value="DEBUG" />
     <preference name="orientation" value="portrait" />
 </widget>
