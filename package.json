@@ -12,6 +12,7 @@
         "WEB_APPLICATION_CLIENT_ID": "175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf.apps.googleusercontent.com"
       },
       "cordova-plugin-whitelist": {},
+      "cordova-plugin-local-notification": {},
       "cordova-plugin-mauron85-background-geolocation": {
         "GOOGLE_PLAY_SERVICES_VERSION": "+",
         "ICON": "@mipmap/icon",
@@ -20,8 +21,7 @@
         "ACCOUNT_LABEL": "@string/app_name",
         "ACCOUNT_TYPE": "$PACKAGE_NAME.account",
         "CONTENT_AUTHORITY": "$PACKAGE_NAME"
-      },
-      "cordova-plugin-local-notification": {}
+      }
     }
   },
   "dependencies": {

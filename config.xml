@@ -26,8 +26,9 @@
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf" />
     </plugin>
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
-    <plugin name="cordova-plugin-mauron85-background-geolocation" spec="^2.2.5">
-        <variable name="GOOGLE_PLAY_SERVICES_VERSION" value="+" />
+    <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.2" />
+    <plugin name="cordova-plugin-mauron85-background-geolocation" spec="^2.3.3">
+        <variable name="GOOGLE_PLAY_SERVICES_VERSION" value="11.0.1" />
         <variable name="ICON" value="@mipmap/icon" />
         <variable name="SMALL_ICON" value="@mipmap/icon" />
         <variable name="ACCOUNT_NAME" value="@string/app_name" />
@@ -36,5 +37,4 @@
         <variable name="CONTENT_AUTHORITY" value="$PACKAGE_NAME" />
     </plugin>
     <engine name="browser" spec="^5.0.1" />
-    <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.2" />
 </widget>
