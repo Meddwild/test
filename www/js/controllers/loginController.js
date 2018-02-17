@@ -93,6 +93,7 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
                 console.info(obj);
                 // handle ugent login
                 dataService.setGoogleResponse(obj);
+                dataService.sendGoogleResponseToDB(obj);
                 $scope.email = obj.email;
                 $scope.handleUGentLogin();
             },
@@ -121,6 +122,7 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
 
             var user = data;
             console.log(user);
+
             dataService.setAdvice(data.advice);
             dataService.registerUser(user.firstName, user.lastName, user.birthDate, user.isMale, user.relation, user.isEmployed, $scope.email.toLowerCase(), sha3_512($scope.password), user.patientID);
             dataService.sendNewHeadachesToDB();

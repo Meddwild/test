@@ -38,10 +38,7 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
     };
 
     $scope.showMenstruation = function() {
-        if($scope.user.sex === true) {
-            return true;
-        }
-        return false;
+        return ! $scope.user.sex;
     };
 
     $scope.showACTInfo = function() {
@@ -88,7 +85,7 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
             "tobacco": $scope.tobacco,
             "cafeine": $scope.cafeine,
             "breakfastTime": $scope.breakfastTime,
-            "lunchtime": $scope.lunchTime,
+            "lunchTime": $scope.lunchTime,
             "dinnerTime": $scope.dinnerTime,
             "depression": $scope.depression,
             "menstruationDate": $scope.menstruationDate,
@@ -105,7 +102,7 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
             }
         }).
         success(function (data, status, headers, config) {
-            // location.href = "dashboard.html";
+            location.href = "dashboard.html";
         }).
         error(function (data, status, headers, config) {
             $scope.foutmelding = "Geen verbinding met de REST service";

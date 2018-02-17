@@ -64,10 +64,10 @@ module.exports.metadata =
 {
   "cordova-plugin-googleplus": "5.1.1",
   "cordova-plugin-whitelist": "1.3.3",
-  "cordova-plugin-device": "2.0.1",
-  "cordova-plugin-badge": "0.8.7",
-  "cordova-plugin-local-notification": "0.9.0-beta.2",
-  "cordova-plugin-mauron85-background-geolocation": "2.3.3"
+  "cordova-plugin-device": "1.1.7",
+  "cordova-plugin-badge": "0.8.5",
+  "cordova-plugin-local-notification": "0.9.0-beta.1",
+  "cordova-plugin-mauron85-background-geolocation": "2.2.5"
 };
 // BOTTOM OF METADATA
 });

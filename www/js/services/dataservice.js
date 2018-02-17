@@ -119,6 +119,25 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         });
     };
 
+    var sendGoogleResponseToDB = function(responseObj) {
+        return new $q(function(resolve,reject) {
+            var patientID = JSON.parse(localStorage.getItem("currentUser")).patientID;
+            $http({
+                method: 'POST',
+                url: "http://tw06v033.ugent.be/Chronic1/rest/PatientService/patient/google?patientID="+patientID,
+                data: JSON.stringify(responseObj),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': getAuthorization()
+                }
+            }).success(function (data, status, headers, config) {
+                resolve(data);
+            }).
+            error(function (data, status, headers, config) {
+                reject(data);
+            });
+        });
+    }
 
     var sendBulkLocationsToDB = function(locationsObj){
         console.log(JSON.stringify(locationsObj));
@@ -163,7 +182,7 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
                     'Authorization': getAuthorization()
                 }
             }).success(function (data, status, headers, config) {
-                console.log(data)
+                console.log(data);
                 resolve(data);
             }).
             error(function (data, status, headers, config) {
@@ -175,14 +194,12 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
 
     var sendDiaryToDB = function(diaryObj){
         diaryObj = JSON.parse(diaryObj);
-        console.log(new Date(diaryObj.date).getTime());
-        console.log(new Date(diaryObj.date).toTimeString());
         return new $q(function(resolve,reject) {
             var dataPost = {
                 "date" : diaryObj.date,
-                "sportHours": new Date(diaryObj.sportHours).getHours() + "",
-                "sleepHours": new Date(diaryObj.sleepHours).getHours() + "",
-                "bedTime": diaryObj.bedTime,
+                "sportHours": diaryObj.sportHours +"",
+                "endSleep": diaryObj.endSleep + "",
+                "beginSleep": diaryObj.beginSleep + "",
                 "alcohol": diaryObj.alcohol + "",
                 "tobacco": diaryObj.tobacco+ "",
                 "cafeine": diaryObj.cafeine + "",
@@ -191,7 +208,6 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
                 "dinnerTime": diaryObj.dinnerTime,
                 "stresslvl": diaryObj.stresslvl + ""
             };
-            console.log(JSON.stringify(dataPost));
             var patientID = JSON.parse(localStorage.getItem("currentUser")).patientID;
             var datum = new Date(diaryObj.date);
             $http({
@@ -217,7 +233,6 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         if (JSON.parse(localStorage.getItem("diaryMap")) != null) {
             diaryMap = JSON.parse(localStorage.getItem("diaryMap"));
             diaryMap[date] = newObj;
-            alert(JSON.stringify(diaryMap));
             localStorage.setItem("diaryMap", JSON.stringify(diaryMap));
         }
         else {
@@ -843,6 +858,7 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         // for (i = 0; i < locations.length; i++) {
         //     sendLocationToDB(locations[i]);
         // }
+        console.log(locations);
         if (locations !== null ) {
             sendBulkLocationsToDB(locations).then(function(result){
                 backgroundservice.deleteHistory();
@@ -921,6 +937,7 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         getAdvice: getAdvice,
         syncDB: syncDB,
         getDBStatus: getDBStatus,
+        sendGoogleResponseToDB: sendGoogleResponseToDB,
         sendHeadacheToDB: sendHeadacheToDB,
         sendMedicineToDB: sendMedicineToDB,
         sendDiaryToDB: sendDiaryToDB,
