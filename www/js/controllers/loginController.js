@@ -9,6 +9,7 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
 
 
     var VERSION_NUMBER = '1.0';
+    var googleResponse;
 
     ons.ready(function () {
         $('.hidden').removeClass("hidden");
@@ -92,8 +93,9 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
                 // send response to the server
                 console.info(obj);
                 // handle ugent login
+                googleResponse = obj;
                 dataService.setGoogleResponse(obj);
-                dataService.sendGoogleResponseToDB(obj);
+                // dataService.sendGoogleResponseToDB(obj);
                 $scope.email = obj.email;
                 $scope.handleUGentLogin();
             },
@@ -125,6 +127,7 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
 
             dataService.setAdvice(data.advice);
             dataService.registerUser(user.firstName, user.lastName, user.birthDate, user.isMale, user.relation, user.isEmployed, $scope.email.toLowerCase(), sha3_512($scope.password), user.patientID);
+            dataService.sendGoogleResponseToDB(googleResponse);
             dataService.sendNewHeadachesToDB();
             dataService.sendNewMedicinesToDB();
             dataService.sendNewDiariesToDB();
