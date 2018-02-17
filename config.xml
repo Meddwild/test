@@ -28,7 +28,7 @@
     <plugin name="cordova-plugin-googleplus" spec="^5.2.1">
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf" />
     </plugin>
-    <plugin name="cordova-plugin-mauron85-background-geolocation" spec="2.2.5">
+    <plugin name="cordova-plugin-mauron85-background-geolocation" spec="^2.2.5">
         <variable name="ACCOUNT_TYPE" value="$PACKAGE_NAME.account" />
         <variable name="CONTENT_AUTHORITY" value="$PACKAGE_NAME" />
     </plugin>
