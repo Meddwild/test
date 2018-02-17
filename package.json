@@ -16,18 +16,18 @@
         "ACCOUNT_TYPE": "$PACKAGE_NAME.account",
         "CONTENT_AUTHORITY": "$PACKAGE_NAME"
       },
-      "cordova-plugin-local-notification": {}
+      "de.appplant.cordova.plugin.local-notification": {}
     }
   },
   "dependencies": {
     "cordova-android": "^6.3.0",
     "cordova-background-location-services": "git+https://github.com/pmwisdom/cordova-background-geolocation-services.git",
     "cordova-browser": "^5.0.1",
-    "cordova-plugin-badge": "^0.8.7",
+    "cordova-plugin-app-event": "^1.2.1",
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-googleplus": "^5.2.1",
-    "cordova-plugin-local-notification": "^0.9.0-beta.2",
     "cordova-plugin-mauron85-background-geolocation": "^2.2.5",
-    "cordova-plugin-whitelist": "^1.3.3"
+    "cordova-plugin-whitelist": "^1.3.3",
+    "de.appplant.cordova.plugin.local-notification": "^0.8.5"
   }
 }

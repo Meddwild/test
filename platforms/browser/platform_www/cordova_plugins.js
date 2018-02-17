@@ -31,48 +31,27 @@ module.exports = [
         "runs": true
     },
     {
-        "file": "plugins/cordova-plugin-badge/www/badge.js",
-        "id": "cordova-plugin-badge.Badge",
-        "pluginId": "cordova-plugin-badge",
+        "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js",
+        "id": "de.appplant.cordova.plugin.local-notification.LocalNotification",
+        "pluginId": "de.appplant.cordova.plugin.local-notification",
         "clobbers": [
-            "cordova.plugins.notification.badge"
+            "cordova.plugins.notification.local",
+            "plugin.notification.local"
         ]
     },
     {
-        "file": "plugins/cordova-plugin-badge/src/browser/favico.min.js",
-        "id": "cordova-plugin-badge.Badge.Favico",
-        "pluginId": "cordova-plugin-badge",
-        "clobbers": [
-            "cordova.plugins.notification.badge.Favico"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-badge/src/browser/BadgeProxy.js",
-        "id": "cordova-plugin-badge.Badge.Proxy",
-        "pluginId": "cordova-plugin-badge",
-        "runs": true
-    },
-    {
-        "file": "plugins/cordova-plugin-local-notification/www/local-notification.js",
-        "id": "cordova-plugin-local-notification.LocalNotification",
-        "pluginId": "cordova-plugin-local-notification",
-        "clobbers": [
-            "cordova.plugins.notification.local"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-local-notification/www/local-notification-core.js",
-        "id": "cordova-plugin-local-notification.LocalNotification.Core",
-        "pluginId": "cordova-plugin-local-notification",
+        "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-core.js",
+        "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Core",
+        "pluginId": "de.appplant.cordova.plugin.local-notification",
         "clobbers": [
             "cordova.plugins.notification.local.core",
             "plugin.notification.local.core"
         ]
     },
     {
-        "file": "plugins/cordova-plugin-local-notification/www/local-notification-util.js",
-        "id": "cordova-plugin-local-notification.LocalNotification.Util",
-        "pluginId": "cordova-plugin-local-notification",
+        "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-util.js",
+        "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Util",
+        "pluginId": "de.appplant.cordova.plugin.local-notification",
         "merges": [
             "cordova.plugins.notification.local.core",
             "plugin.notification.local.core"
@@ -86,8 +65,8 @@ module.exports.metadata =
     "cordova-plugin-googleplus": "5.2.1",
     "cordova-plugin-mauron85-background-geolocation": "2.2.5",
     "cordova-plugin-device": "2.0.1",
-    "cordova-plugin-badge": "0.8.7",
-    "cordova-plugin-local-notification": "0.9.0-beta.2"
+    "cordova-plugin-app-event": "1.2.1",
+    "de.appplant.cordova.plugin.local-notification": "0.8.5"
 }
 // BOTTOM OF METADATA
 });
