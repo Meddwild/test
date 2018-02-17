@@ -38,4 +38,5 @@
         <variable name="CONTENT_AUTHORITY" value="$PACKAGE_NAME" />
     </plugin>
     <engine name="browser" spec="^5.0.1" />
+    <engine name="android" spec="^7.0.0" />
 </widget>

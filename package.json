@@ -4,7 +4,8 @@
   "displayName": "Chronicals",
   "cordova": {
     "platforms": [
-      "browser"
+      "browser",
+      "android"
     ],
     "plugins": {
       "cordova-plugin-googleplus": {
@@ -25,7 +26,7 @@
     }
   },
   "dependencies": {
-    "cordova-android": "^6.3.0",
+    "cordova-android": "^7.0.0",
     "cordova-background-location-services": "git+https://github.com/pmwisdom/cordova-background-geolocation-services.git",
     "cordova-browser": "^5.0.1",
     "cordova-plugin-badge": "^0.8.7",
