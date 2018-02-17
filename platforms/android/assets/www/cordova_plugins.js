@@ -9,6 +9,14 @@ module.exports = [
     ]
   },
   {
+    "id": "cordova-plugin-mauron85-background-geolocation.backgroundGeolocation",
+    "file": "plugins/cordova-plugin-mauron85-background-geolocation/www/backgroundGeolocation.js",
+    "pluginId": "cordova-plugin-mauron85-background-geolocation",
+    "clobbers": [
+      "backgroundGeolocation"
+    ]
+  },
+  {
     "id": "cordova-plugin-device.device",
     "file": "plugins/cordova-plugin-device/www/device.js",
     "pluginId": "cordova-plugin-device",
@@ -49,14 +57,6 @@ module.exports = [
       "cordova.plugins.notification.local.core",
       "plugin.notification.local.core"
     ]
-  },
-  {
-    "id": "cordova-plugin-mauron85-background-geolocation.backgroundGeolocation",
-    "file": "plugins/cordova-plugin-mauron85-background-geolocation/www/backgroundGeolocation.js",
-    "pluginId": "cordova-plugin-mauron85-background-geolocation",
-    "clobbers": [
-      "backgroundGeolocation"
-    ]
   }
 ];
 module.exports.metadata = 
@@ -64,10 +64,10 @@ module.exports.metadata =
 {
   "cordova-plugin-googleplus": "5.1.1",
   "cordova-plugin-whitelist": "1.3.3",
-  "cordova-plugin-device": "1.1.7",
-  "cordova-plugin-badge": "0.8.5",
-  "cordova-plugin-local-notification": "0.9.0-beta.1",
-  "cordova-plugin-mauron85-background-geolocation": "2.2.5"
+  "cordova-plugin-mauron85-background-geolocation": "2.2.5",
+  "cordova-plugin-device": "2.0.1",
+  "cordova-plugin-badge": "0.8.7",
+  "cordova-plugin-local-notification": "0.9.0-beta.2"
 };
 // BOTTOM OF METADATA
 });
