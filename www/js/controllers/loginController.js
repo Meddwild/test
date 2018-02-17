@@ -164,6 +164,7 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
                     }
                 }
             } else {
+				console.log(data);
                 alert("Er is een fout opgetreden, probeer opnieuw... " + status)
             }
         });
