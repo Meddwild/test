@@ -56,6 +56,10 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
         xmlHttp.send(null);
         return xmlHttp.responseText;
     };
+	
+	var today_at_9_pm = new Date();
+	today_at_9_pm.setHours(21);
+	today_at_9_pm.setMinutes(00);
 
     $scope.setNotifications = function () {
         cordova.plugins.notification.local.schedule([
@@ -63,9 +67,8 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
                 id: 1,
                 title: 'Vergeet uw dagboek niet in te vullen',
                 text: 'Vult u even uw dagboek in? Zo kunnen we u nog beter helpen.',
-                trigger: {every: {hour: 21, minute: 0}},
-                foreground: true,
-                sound: null
+				every: 'day',
+				firstAt: today_at_9_pm
             }
         ]);
     };

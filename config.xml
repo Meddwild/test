@@ -32,5 +32,5 @@
         <variable name="ACCOUNT_TYPE" value="$PACKAGE_NAME.account" />
         <variable name="CONTENT_AUTHORITY" value="$PACKAGE_NAME" />
     </plugin>
-    <plugin name="de.appplant.cordova.plugin.local-notification" spec="^0.8.5" />
+    <plugin name="de.appplant.cordova.plugin.local-notification" spec="0.8.5" />
 </widget>
