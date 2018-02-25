@@ -13,6 +13,10 @@
               "count": 1
             },
             {
+              "xml": "<feature name=\"BackgroundGeolocation\"><param name=\"android-package\" value=\"com.tenforwardconsulting.cordova.BackgroundGeolocationPlugin\" /></feature>",
+              "count": 1
+            },
+            {
               "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
               "count": 1
             },
@@ -22,10 +26,6 @@
             },
             {
               "xml": "<feature name=\"LocalNotification\"><param name=\"android-package\" value=\"de.appplant.cordova.plugin.localnotification.LocalNotification\" /></feature>",
-              "count": 1
-            },
-            {
-              "xml": "<feature name=\"BackgroundGeolocation\"><param name=\"android-package\" value=\"com.tenforwardconsulting.cordova.BackgroundGeolocationPlugin\" /></feature>",
               "count": 1
             },
             {
@@ -101,22 +101,6 @@
           ],
           "/manifest/application": [
             {
-              "xml": "<provider android:authorities=\"${applicationId}.provider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"de.appplant.cordova.plugin.notification.util.AssetProvider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/localnotification_provider_paths\" /></provider>",
-              "count": 1
-            },
-            {
-              "xml": "<receiver android:exported=\"false\" android:name=\"de.appplant.cordova.plugin.localnotification.TriggerReceiver\" />",
-              "count": 1
-            },
-            {
-              "xml": "<receiver android:exported=\"false\" android:name=\"de.appplant.cordova.plugin.localnotification.ClearReceiver\" />",
-              "count": 1
-            },
-            {
-              "xml": "<activity android:exported=\"false\" android:launchMode=\"singleInstance\" android:name=\"de.appplant.cordova.plugin.localnotification.ClickReceiver\" android:theme=\"@android:style/Theme.Translucent\" />",
-              "count": 1
-            },
-            {
               "xml": "<meta-data android:name=\"com.google.android.gms.version\" android:value=\"@integer/google_play_services_version\" />",
               "count": 1
             },
@@ -138,6 +122,22 @@
             },
             {
               "xml": "<receiver android:enabled=\"true\" android:exported=\"true\" android:name=\"com.marianhello.bgloc.BootCompletedReceiver\"><intent-filter><action android:name=\"android.intent.action.BOOT_COMPLETED\" /></intent-filter></receiver>",
+              "count": 1
+            },
+            {
+              "xml": "<provider android:authorities=\"${applicationId}.provider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"de.appplant.cordova.plugin.notification.util.AssetProvider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/localnotification_provider_paths\" /></provider>",
+              "count": 1
+            },
+            {
+              "xml": "<receiver android:exported=\"false\" android:name=\"de.appplant.cordova.plugin.localnotification.TriggerReceiver\" />",
+              "count": 1
+            },
+            {
+              "xml": "<receiver android:exported=\"false\" android:name=\"de.appplant.cordova.plugin.localnotification.ClearReceiver\" />",
+              "count": 1
+            },
+            {
+              "xml": "<activity android:exported=\"false\" android:launchMode=\"singleInstance\" android:name=\"de.appplant.cordova.plugin.localnotification.ClickReceiver\" android:theme=\"@android:style/Theme.Translucent\" />",
               "count": 1
             }
           ]
@@ -207,15 +207,6 @@
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "be.ugent.chronicals"
     },
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "be.ugent.chronicals"
-    },
-    "cordova-plugin-badge": {
-      "PACKAGE_NAME": "be.ugent.chronicals"
-    },
-    "cordova-plugin-local-notification": {
-      "PACKAGE_NAME": "be.ugent.chronicals"
-    },
     "cordova-plugin-mauron85-background-geolocation": {
       "GOOGLE_PLAY_SERVICES_VERSION": "+",
       "ICON": "@mipmap/icon",
@@ -226,12 +217,29 @@
       "CONTENT_AUTHORITY": "$PACKAGE_NAME",
       "PACKAGE_NAME": "be.ugent.chronicals"
     },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "be.ugent.chronicals"
+    },
+    "cordova-plugin-badge": {
+      "PACKAGE_NAME": "be.ugent.chronicals"
+    },
+    "cordova-plugin-local-notification": {
+      "PACKAGE_NAME": "be.ugent.chronicals"
+    },
     "cordova-plugin-googleplus": {
       "PACKAGE_NAME": "be.ugent.chronicals"
     }
   },
   "dependent_plugins": {},
   "modules": [
+    {
+      "id": "cordova-plugin-mauron85-background-geolocation.backgroundGeolocation",
+      "file": "plugins/cordova-plugin-mauron85-background-geolocation/www/backgroundGeolocation.js",
+      "pluginId": "cordova-plugin-mauron85-background-geolocation",
+      "clobbers": [
+        "backgroundGeolocation"
+      ]
+    },
     {
       "id": "cordova-plugin-device.device",
       "file": "plugins/cordova-plugin-device/www/device.js",
@@ -275,14 +283,6 @@
       ]
     },
     {
-      "id": "cordova-plugin-mauron85-background-geolocation.backgroundGeolocation",
-      "file": "plugins/cordova-plugin-mauron85-background-geolocation/www/backgroundGeolocation.js",
-      "pluginId": "cordova-plugin-mauron85-background-geolocation",
-      "clobbers": [
-        "backgroundGeolocation"
-      ]
-    },
-    {
       "id": "cordova-plugin-googleplus.GooglePlus",
       "file": "plugins/cordova-plugin-googleplus/www/GooglePlus.js",
       "pluginId": "cordova-plugin-googleplus",
@@ -293,10 +293,10 @@
   ],
   "plugin_metadata": {
     "cordova-plugin-whitelist": "1.3.3",
-    "cordova-plugin-device": "1.1.7",
-    "cordova-plugin-badge": "0.8.5",
-    "cordova-plugin-local-notification": "0.9.0-beta.1",
     "cordova-plugin-mauron85-background-geolocation": "2.3.3",
+    "cordova-plugin-device": "2.0.1",
+    "cordova-plugin-badge": "0.8.7",
+    "cordova-plugin-local-notification": "0.9.0-beta.2",
     "cordova-plugin-googleplus": "5.2.1"
   }
 }
