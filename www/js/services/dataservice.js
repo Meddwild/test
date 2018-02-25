@@ -140,7 +140,6 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
     }
 
     var sendBulkLocationsToDB = function(locationsObj){
-        console.log(JSON.stringify(locationsObj));
         return new $q(function(resolve,reject) {
             var patientID = JSON.parse(localStorage.getItem("currentUser")).patientID;
             $http({
@@ -858,7 +857,6 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         // for (i = 0; i < locations.length; i++) {
         //     sendLocationToDB(locations[i]);
         // }
-        console.log(locations);
         if (locations !== null ) {
             sendBulkLocationsToDB(locations).then(function(result){
                 backgroundservice.deleteHistory();

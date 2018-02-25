@@ -56,10 +56,6 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
         xmlHttp.send(null);
         return xmlHttp.responseText;
     };
-	
-	var today_at_9_pm = new Date();
-	today_at_9_pm.setHours(21);
-	today_at_9_pm.setMinutes(00);
 
     $scope.setNotifications = function () {
         cordova.plugins.notification.local.schedule([
@@ -67,8 +63,9 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
                 id: 1,
                 title: 'Vergeet uw dagboek niet in te vullen',
                 text: 'Vult u even uw dagboek in? Zo kunnen we u nog beter helpen.',
-				every: 'day',
-				firstAt: today_at_9_pm
+                trigger: {every: {hour: 21, minute: 0}},
+                foreground: true,
+                sound: null
             }
         ]);
     };
@@ -88,7 +85,7 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
 
         window.plugins.googleplus.login(
             {
-                'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/fitness.activity.write https://www.googleapis.com/auth/fitness.body.read https://www.googleapis.com/auth/fitness.body.write https://www.googleapis.com/auth/fitness.location.read https://www.googleapis.com/auth/fitness.location.write https://www.googleapis.com/auth/fitness.nutrition.read https://www.googleapis.com/auth/fitness.nutrition.write',
+                'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/fitness https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/fitness.activity.write https://www.googleapis.com/auth/fitness.body.read https://www.googleapis.com/auth/fitness.body.write https://www.googleapis.com/auth/fitness.location.read https://www.googleapis.com/auth/fitness.location.write https://www.googleapis.com/auth/fitness.nutrition.read https://www.googleapis.com/auth/fitness.nutrition.write',
                 'webClientId': '175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
                 'offline': true
             },
@@ -117,16 +114,15 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
         dataService.registerUser("", "", null, true, null, true, $scope.email.toLowerCase(), sha3_512($scope.password), 0);
         // We can't use getAuthorization yet from the dataservice since no user is registered yet.
         //dataService.getDBStatus().then(function(result){
-        //var test = [$http.get('http://tw06v033.ugent.be/Chronic1/rest/PatientService/login', {headers: {'Authorization': dataService.getAuthorization()}})]
-        //$q.all(test).then(function () {
-//
-  //          }
-    //    );
+        // var test = [$http.get('http://tw06v033.ugent.be/Chronic1/rest/PatientService/login', {headers: {'Authorization': dataService.getAuthorization()}})]
+        // $q.all(test).then(function () {
+        //
+        //     }
+        // );
         $http.get('http://tw06v033.ugent.be/Chronic1/rest/PatientService/login', {headers: {'Authorization': dataService.getAuthorization()}}).success(function (data, status, headers, config) {
 
 
             var user = data;
-            console.log(user);
 
             dataService.setAdvice(data.advice);
             dataService.registerUser(user.firstName, user.lastName, user.birthDate, user.isMale, user.relation, user.isEmployed, $scope.email.toLowerCase(), sha3_512($scope.password), user.patientID);
@@ -167,8 +163,7 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
                     }
                 }
             } else {
-				console.log(data);
-                alert("Er is een fout opgetreden, probeer opnieuw... " + status)
+                alert("Er is een fout opgetreden, probeer opnieuw... " + status);
             }
         });
     };

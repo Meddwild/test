@@ -8,6 +8,7 @@
     <author>
         Kiani Lannoye and Gilles Vandewiele
     </author>
+	<preference name="phonegap-version" value="cli-7.1.0" />
     <preference name="orientation" value="portrait" />
     <feature name="http://api.phonegap.com/1.0/file" />
     <feature name="http://api.phonegap.com/1.0/notification" />
@@ -22,15 +23,21 @@
     <allow-navigation href="http://*/*" />
     <access origin="http://localhost/*" />
     <access origin="*" />
+    <gap:plugin source="git" spec="https://github.com/habibillah/cordova-plugin-googleplus.git">
+        <param name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf" />
+        <param name="WEB_APPLICATION_CLIENT_ID" value="175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf.apps.googleusercontent.com" />
+    </gap:plugin>
     <engine name="browser" spec="^5.0.1" />
-    <engine name="android" spec="^6.3.0" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
-    <plugin name="cordova-plugin-googleplus" spec="^5.2.1">
-        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf" />
-    </plugin>
-    <plugin name="cordova-plugin-mauron85-background-geolocation" spec="2.2.5">
+    <plugin name="cordova-plugin-local-notification" spec="git+https://github.com/katzer/cordova-plugin-local-notifications.git" />
+    <plugin name="cordova-plugin-mauron85-background-geolocation" spec="^2.3.3">
+        <variable name="GOOGLE_PLAY_SERVICES_VERSION" value="+" />
+        <variable name="ICON" value="@mipmap/icon" />
+        <variable name="SMALL_ICON" value="@mipmap/icon" />
+        <variable name="ACCOUNT_NAME" value="@string/app_name" />
+        <variable name="ACCOUNT_LABEL" value="@string/app_name" />
         <variable name="ACCOUNT_TYPE" value="$PACKAGE_NAME.account" />
         <variable name="CONTENT_AUTHORITY" value="$PACKAGE_NAME" />
     </plugin>
-    <plugin name="de.appplant.cordova.plugin.local-notification" spec="0.8.5" />
+    <plugin name="cordova-plugin-googleplus" spec="^5.2.1" />
 </widget>

@@ -92,6 +92,8 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
+apply from: "cordova-plugin-badge/chronicals-badge.gradle"
+apply from: "cordova-plugin-local-notification/chronicals-localnotification.gradle"
 apply from: "cordova-plugin-mauron85-background-geolocation/chronicals-logtofile.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
@@ -254,10 +256,11 @@ dependencies {
     // SUB-PROJECT DEPENDENCIES START
     debugCompile(project(path: "CordovaLib", configuration: "debug"))
     releaseCompile(project(path: "CordovaLib", configuration: "release"))
-    compile "com.google.android.gms:play-services-auth:+"
-    compile "com.google.android.gms:play-services-identity:+"
+    compile "com.android.support:support-v4:26.+"
     compile "com.google.android.gms:play-services-location:+"
     compile "com.android.support:support-v4:+"
+    compile "com.google.android.gms:play-services-auth:+"
+    compile "com.google.android.gms:play-services-identity:+"
     // SUB-PROJECT DEPENDENCIES END
 }
 
