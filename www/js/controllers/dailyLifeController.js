@@ -59,10 +59,11 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
     $scope.depression = false;
     $scope.menstruationDate = datum;
     $scope.menstruationDuration = 28;
+    $scope.ownedWearable = "";
 
     $scope.submitDailyLife = function () {
 
-        dataService.setDailyLife($scope.city, $scope.sportHours, $scope.endSleep, $scope.beginSleep, $scope.alcohol, $scope.tobacco, $scope.cafeine, $scope.breakfastTime, $scope.lunchTime, $scope.dinnerTime, $scope.depression, $scope.menstruationDate, $scope.menstruationDuration);
+        dataService.setDailyLife($scope.city, $scope.sportHours, $scope.endSleep, $scope.beginSleep, $scope.alcohol, $scope.tobacco, $scope.cafeine, $scope.breakfastTime, $scope.lunchTime, $scope.dinnerTime, $scope.depression, $scope.menstruationDate, $scope.menstruationDuration, $scope.ownedWearable);
 
         // update user with dailylife
         var user = {
@@ -89,7 +90,8 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
             "dinnerTime": $scope.dinnerTime,
             "depression": $scope.depression,
             "menstruationDate": $scope.menstruationDate,
-            "menstruationDuration": $scope.menstruationDuration
+            "menstruationDuration": $scope.menstruationDuration,
+            "ownedWearable": $scope.ownedWearable
         };
 
         console.log(JSON.stringify(user));

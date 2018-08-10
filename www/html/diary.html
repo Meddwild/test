@@ -77,7 +77,7 @@
                 <input id="daily__dinner" ng-model="data.dinnerTime" type="time" class="form__input" placeholder="{{data.dinnerTime}}">
             </div>
 
-            <h6>Indien u een maaltijd overgeslagen hebt, klik dan op het logo naast het uur om dit duitelijk te maken</h6>
+            <h6>Indien u een maaltijd overgeslagen hebt, klik dan op het logo naast het uur om dit duidelijk te maken</h6>
 
             <ons-row>
                 <p class="label list_separator">Hoe lang heeft u gesport vandaag?</p>
@@ -89,7 +89,7 @@
             </div>
 
             <ons-row>
-                <p class="label list_separator">Om hoe laat ging u slapen, en hoe laat werd u wakker?</p>
+                <p class="label list_separator">Om hoe laat ging u slapen, hoe laat werd u wakker en hoe goed heeft u geslapen?</p>
             </ons-row>
 
             <div class="form__field">
@@ -102,23 +102,29 @@
                 <input id="daily_endSleep" ng-model="data.endSleep" type="time" class="form__input" step="60" placeholder="{{data.endSleep}}">
             </div>
 
-            <ons-row>
-                <p class="label list_separator">Hoeveel van de volgende middelen heeft u gebruikt?</p>
+            <div class="form__field">
+                <label class="fontawesome-star" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_sleepScore"> <span class="hidden">Score</span></label>
+                <input id="daily_sleepScore" ng-model="data.sleepScore" type="number" class="form__input" placeholder="{{data.sleepScore}}" min="0" max="10">
+            </div>
+
+            <ons-row class="list_header">
+                <ons-col >Hoe veel porties van de volgende middelen gebruikt u wekelijks?</ons-col>
+                <ons-col width="50px" ng-click="showACTInfo()"><ons-icon width="50px" height="100px" icon="fa-question-circle"></ons-icon></ons-col>
             </ons-row>
 
             <div class="form__field">
-                <label class="fontawesome-glass" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_alcohol"> <span class="hidden">Alcohol</span> <span class="fontawesome-question-sign"></span></label>
-                <input id="daily_alcohol" ng-model="data.alcohol" type="number" class="form__input" placeholder="{{data.alcohol}}" min="0" max="20">
+                <label class="fontawesome-glass" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_alcohol"> <span class="hidden">Alcohol</span></label>
+                <input id="daily_alcohol" ng-model="data.alcohol" type="number" class="form__input" placeholder="{{data.alcohol}}" min="0">
             </div>
 
             <div class="form__field">
                 <label class="fontawesome-coffee" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_cafeine"> <span class="hidden">Cafeine</span></label>
-                <input id="daily_cafeine" ng-model="data.cafeine" type="number" class="form__input" placeholder="{{data.cafeine}}" min="0" max="20">
+                <input id="daily_cafeine" ng-model="data.cafeine" type="number" class="form__input" placeholder="{{data.cafeine}}" min="0">
             </div>
 
             <div class="form__field">
                 <label class="fontawesome-fire" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_tobacco"> <span class="hidden">Tabak</span></label>
-                <input id="daily_tobacco" ng-model="data.tobacco" type="number" class="form__input" placeholder="{{data.tobacco}}" min="0" max="20">
+                <input id="daily_tobacco" ng-model="data.tobacco" type="number" class="form__input" placeholder="{{data.tobacco}}" min="0">
             </div>
 
             <ons-row>

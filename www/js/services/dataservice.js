@@ -205,7 +205,8 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
                 "breakfastTime": diaryObj.breakfastTime,
                 "lunchTime": diaryObj.lunchTime,
                 "dinnerTime": diaryObj.dinnerTime,
-                "stresslvl": diaryObj.stresslvl + ""
+                "stresslvl": diaryObj.stresslvl + "",
+                "sleepScore": diaryObj.sleepScore + ""
             };
             var patientID = JSON.parse(localStorage.getItem("currentUser")).patientID;
             var datum = new Date(diaryObj.date);
@@ -317,6 +318,107 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         }
     }
 
+    var getWeekSportData = function(date) {
+        var sportArray = [];
+        return new $q(
+            async function (resolve, reject) {
+            for (var i = 0; i < 12; i++) {
+                var date = moment().subtract(i, 'day').format('DD/MM/YY');
+
+                sportArray[date] = await getSportData(date);
+            }
+            console.info(sportArray);
+            resolve(sportArray);
+        });
+    };
+
+    var getSportData = function(date) {
+        var patientID = JSON.parse(localStorage.getItem("currentUser")).patientID;
+        return new $q(
+            function (resolve, reject) {
+                $http.get('http://tw06v033.ugent.be/Chronic1/rest/SportService/sport?patientID='+patientID+'&date='+date, {headers: {'Authorization': getAuthorization()}}).
+                success(function (data, status, headers, config) {
+                    resolve(data);
+                }).
+                error(function (data, status, headers, config) {
+                    resolve(data);
+                });
+            });
+    };
+
+    var getDiaryData = function(date) {
+        var patientID = JSON.parse(localStorage.getItem("currentUser")).patientID;
+        return new $q(
+            function (resolve, reject) {
+                // $http.get('http://tw06v033.ugent.be/Chronic1/rest/DiaryService/diary?patientID='+patientID+'&date='+date, {headers: {'Authorization': getAuthorization()}}).
+                $http.get('http://tw06v033.ugent.be/Chronic1/rest/DiaryService/diary?patientID='+patientID+'&date=24/04/18', {headers: {'Authorization': getAuthorization()}}).
+                success(function (data, status, headers, config) {
+                    resolve(data);
+                }).
+                error(function (data, status, headers, config) {
+                    resolve(data);
+                });
+            });
+    }
+
+    var getPrediction = function(date) {
+        var patientID = JSON.parse(localStorage.getItem("currentUser")).patientID;
+        return new $q(
+            function (resolve, reject) {
+                $http.get('http://tw06v033.ugent.be/Chronic1/rest/DiaryService/diary/predict?patientID='+patientID+'&date='+date, {headers: {'Authorization': getAuthorization()}}).
+                success(function (data, status, headers, config) {
+                    resolve(data);
+                }).
+                error(function (data, status, headers, config) {
+                    resolve(data);
+                });
+            });
+    }
+
+    var getWeekDiaryData = function(date) {
+        var diaryArray = [];
+        return new $q(
+            async function (resolve, reject) {
+            for (var i = 0; i < 12; i++) {
+                var date = moment().subtract(i, 'day').format('DD/MM/YY');
+
+                diaryArray[date] = await getDiaryData(date);
+            }
+            console.info(diaryArray);
+            resolve(diaryArray);
+        });
+    };
+
+    var getSleepData = function(date) {
+        var patientID = JSON.parse(localStorage.getItem("currentUser")).patientID;
+        return new $q(
+            function (resolve, reject) {
+                $http.get('http://tw06v033.ugent.be/Chronic1/rest/SleepService/sleep?patientID='+patientID+'&date='+date, {headers: {'Authorization': getAuthorization()}}).
+                success(function (data, status, headers, config) {
+                    resolve(data);
+                }).
+                error(function (data, status, headers, config) {
+                    console.log(status);
+                    console.log(data);
+                    resolve(data);
+                });
+            });
+    };
+
+    var getWeekSleepData = function(date) {
+        var sleepArray = [];
+        return new $q(
+            async function (resolve, reject) {
+            for (var i = 0; i < 12; i++) {
+                var date = moment().subtract(i, 'day').format('DD/MM/YY');
+
+                sleepArray[date] = await getSleepData(date);
+            }
+            console.info(sleepArray);
+            resolve(sleepArray);
+        });
+    };
+
     var getDrugsFromDB = function(){
         return new $q(
             function (resolve, reject) {
@@ -359,7 +461,7 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
                     var categories = [];
                     symptoms.forEach(function (entry) {
                         newSymptoms.push({id: entry.symptomID, name: entry.name, description: entry.description,
-                                          val: false, category: entry.category, duration: entry.duration});
+                            val: false, category: entry.category, duration: entry.duration});
                         categories.push(entry.category);
                     });
                     console.log("Got symptoms: ", symptoms[0]);
@@ -389,7 +491,7 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
                     var newTriggers = [];
                     triggers.forEach(function (entry) {
                         newTriggers.push({id: entry.triggerID, name: entry.name, description: entry.description,
-                                          val: false});
+                            val: false});
                     });
                     localStorage.setItem("triggers", JSON.stringify(newTriggers));
                     resolve();
@@ -439,7 +541,7 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
                             end = entry.end;
                         }
                         newHeadaches.push({id: entry.headacheID, end: end, intensityValues: entry.intensityValues, location: newLocations,
-                                           symptoms: newHeadacheSymptoms, triggers: newHeadacheTriggers});
+                            symptoms: newHeadacheSymptoms, triggers: newHeadacheTriggers});
                     });
                     localStorage.setItem("headacheList", JSON.stringify(newHeadaches));
                     resolve();
@@ -594,29 +696,29 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
     var removeHeadache = function () {
         return new $q(function(resolve,reject) {
 
-        var list = JSON.parse(localStorage.getItem("headacheList"));
-        var current = JSON.parse(localStorage.getItem("currentHeadache"));
+            var list = JSON.parse(localStorage.getItem("headacheList"));
+            var current = JSON.parse(localStorage.getItem("currentHeadache"));
 
             removeHeadacheFromDB(current).then(function(result){
-            var index = -1;
-            for (var i = 0; i < list.length; i++) {
-                if (list[i].intensityValues[0].key == current.intensityValues[0].key) {
-                    index = i;
-                    break;
+                var index = -1;
+                for (var i = 0; i < list.length; i++) {
+                    if (list[i].intensityValues[0].key == current.intensityValues[0].key) {
+                        index = i;
+                        break;
+                    }
                 }
-            }
-            list.splice(index, 1);
+                list.splice(index, 1);
 
-            localStorage.setItem("headacheList", JSON.stringify(list));
-            headacheList = list;
+                localStorage.setItem("headacheList", JSON.stringify(list));
+                headacheList = list;
                 resolve();
-        }, function(result){
+            }, function(result){
                 reject()
             });
 
 
-        currentHeadache = null;
-        localStorage.setItem("currentHeadache", JSON.stringify(null));
+            currentHeadache = null;
+            localStorage.setItem("currentHeadache", JSON.stringify(null));
 
         });
     };
@@ -790,11 +892,11 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         return JSON.parse(localStorage.getItem("googleResponse"));
     }
 
-    var setDailyLife = function (_city, _sportHours, _endSleep, _beginSleep, _alcohol, _tobacco, _cafeine, _breakfastTime, _lunchTime, _dinnerTime, _depression, _menstruationDate, _menstruationDuration) {
+    var setDailyLife = function (_city, _sportHours, _endSleep, _beginSleep, _alcohol, _tobacco, _cafeine, _breakfastTime, _lunchTime, _dinnerTime, _depression, _menstruationDate, _menstruationDuration, _ownedWearable) {
         var dailyLife = {
             city: _city, sportHours: _sportHours, endSleep: _endSleep, beginSleep: _beginSleep, alcohol: _alcohol,
             tobacco: _tobacco, cafeine: _cafeine, breakfastTime: _breakfastTime, lunchTime: _lunchTime, dinnerTime: _dinnerTime, depression: _depression,
-            menstruationDate: _menstruationDate, menstruationDuration: _menstruationDuration
+            menstruationDate: _menstruationDate, menstruationDuration: _menstruationDuration, ownedWearable: _ownedWearable
         };
         localStorage.setItem("dailyLife", JSON.stringify(dailyLife));
     };
@@ -904,6 +1006,12 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         setHeadacheList: setHeadacheList,
         getDiaryMap: getDiaryMap,
         setDiaryMap: setDiaryMap,
+        getSleepData: getSleepData,
+        getDiaryData: getDiaryData,
+        getWeekSleepData: getWeekSleepData,
+        getWeekDiaryData: getWeekDiaryData,
+        getSportData: getSportData,
+        getWeekSportData: getWeekSportData,
         getGoogleResponse: getGoogleResponse,
         setGoogleResponse: setGoogleResponse,
         setCurrentHeadache: setCurrentHeadache,
@@ -915,6 +1023,7 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         getCurrentUser: getCurrentUser,
         getDailyLife: getDailyLife,
         setDailyLife: setDailyLife,
+        getPrediction: getPrediction,
         getSymptoms: getSymptoms,
         getTriggers: getTriggers,
         removeHeadache: removeHeadache,

@@ -110,19 +110,40 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
     }
 
     if (mapEntry === null || mapEntry === undefined) {
-        // no entry yet, so use the daily life values
-        $scope.dailyLife = dataService.getDailyLife();
+        // no entry yet, so use get the predictions
 
-        $scope.data.breakfastTime = new Date($scope.dailyLife.breakfastTime);
-        $scope.data.lunchTime = new Date($scope.dailyLife.lunchTime);
-        $scope.data.dinnerTime = new Date($scope.dailyLife.dinnerTime);
-        $scope.data.sportHours = new Date($scope.dailyLife.sportHours);
-        $scope.data.beginSleep = new Date($scope.dailyLife.beginSleep);
-        $scope.data.endSleep = new Date($scope.dailyLife.endSleep);
-        $scope.data.alcohol = $scope.dailyLife.alcohol;
-        $scope.data.cafeine = $scope.dailyLife.cafeine;
-        $scope.data.tobacco = $scope.dailyLife.tobacco;
-        $scope.data.stresslvl = 0;
+        console.log(datumindex)
+        dataService.getPrediction(datumindex).then(function(result) {
+
+            console.log(result);
+
+            var breakfastDate = new Date(result.breakfast);
+            $scope.data.breakfastTime = (result.breakfast === null) ? null : new Date(result.breakfast.slice(0,-4) + '000Z')
+            $scope.data.lunchTime = (result.lunch === null) ? null : new Date(result.lunch.slice(0,-4) + '000Z')
+            $scope.data.dinnerTime = (result.dinner === null) ? null : new Date(result.dinner.slice(0,-4) + '000Z')
+            $scope.data.sportHours = new Date(result.sport);
+            $scope.data.beginSleep = new Date(result.beginSleep);
+            $scope.data.endSleep = new Date(result.endSleep);
+            $scope.data.alcohol = result.alcohol;
+            $scope.data.cafeine = result.cafeine;
+            $scope.data.tobacco = result.tobacco;
+            $scope.data.stresslvl = result.stress;
+            $scope.data.sleepScore = result.sleepScore;
+
+            // $scope.data.breakfastTime = new Date($scope.dailyLife.breakfastTime);
+            // $scope.data.lunchTime = new Date($scope.dailyLife.lunchTime);
+            // $scope.data.dinnerTime = new Date($scope.dailyLife.dinnerTime);
+            // $scope.data.sportHours = new Date($scope.dailyLife.sportHours);
+            // $scope.data.beginSleep = new Date($scope.dailyLife.beginSleep);
+            // $scope.data.endSleep = new Date($scope.dailyLife.endSleep);
+            // $scope.data.alcohol = $scope.dailyLife.alcohol;
+            // $scope.data.cafeine = $scope.dailyLife.cafeine;
+            // $scope.data.tobacco = $scope.dailyLife.tobacco;
+            // $scope.data.stresslvl = 4;
+            // $scope.data.sleepScore = 5;
+        });
+
+
     } else {
         // there is already an entry for this date, so reuse the data
         if(mapEntry.breakfastTime === "null") {
@@ -143,8 +164,6 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         } else {
             $scope.data.dinnerTime = new Date(mapEntry.dinnerTime);
         }
-        $scope.data.lunchTime = new Date(mapEntry.lunchTime);
-        $scope.data.dinnerTime = new Date(mapEntry.dinnerTime);
         $scope.data.sportHours = new Date(mapEntry.sportHours);
         $scope.data.beginSleep = new Date(mapEntry.beginSleep);
         $scope.data.endSleep = new Date(mapEntry.endSleep);
@@ -152,6 +171,7 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         $scope.data.cafeine = mapEntry.cafeine;
         $scope.data.tobacco = mapEntry.tobacco;
         $scope.data.stresslvl = mapEntry.stresslvl;
+        $scope.data.sleepScore = mapEntry.sleepScore
 
         if(mapEntry.breakfastTime == null) {
             $scope.disableBreakfast = !$scope.disableBreakfast;
@@ -170,31 +190,39 @@ angular.module('Chronic').config(['$httpProvider', function ($httpProvider) {
         }
     }
 
+    $scope.showACTInfo = function() {
+        alert(" Alcohol: Aantal glazen bier van 25 cl \n Koffie: Aantal koppen van 20 cl \n Tabak: Aantal sigaretten");
+    }
 
     $scope.submitDiary = function () {
 
-        if($scope.disableBreakfast) $scope.data.breakfastTime = "null";
-        if($scope.disableLunch) $scope.data.lunchTime = "null";
-        if($scope.disableDinner) $scope.data.dinnerTime = "null";
+        if($scope.data.sleepScore === undefined || $scope.data.stresslvl === undefined) {
+            alert("Geef voor zowel uw slaapscore als voor uw stresslevel een getal in tussen 0 en 10");
+        } else {
+            if($scope.disableBreakfast) $scope.data.breakfastTime = "null";
+            if($scope.disableLunch) $scope.data.lunchTime = "null";
+            if($scope.disableDinner) $scope.data.dinnerTime = "null";
 
-        var diary = {
-            "date": datum,
-            "sportHours": $scope.data.sportHours,
-            "endSleep": $scope.data.endSleep,
-            "beginSleep": $scope.data.beginSleep,
-            "alcohol": $scope.data.alcohol,
-            "tobacco": $scope.data.tobacco,
-            "cafeine": $scope.data.cafeine,
-            "breakfastTime": $scope.data.breakfastTime,
-            "lunchTime": $scope.data.lunchTime,
-            "dinnerTime": $scope.data.dinnerTime,
-            "stresslvl": $scope.data.stresslvl
-        };
+            var diary = {
+                "date": datum,
+                "sportHours": $scope.data.sportHours,
+                "endSleep": $scope.data.endSleep,
+                "beginSleep": $scope.data.beginSleep,
+                "alcohol": $scope.data.alcohol,
+                "tobacco": $scope.data.tobacco,
+                "cafeine": $scope.data.cafeine,
+                "breakfastTime": $scope.data.breakfastTime,
+                "lunchTime": $scope.data.lunchTime,
+                "dinnerTime": $scope.data.dinnerTime,
+                "stresslvl": $scope.data.stresslvl,
+                "sleepScore": $scope.data.sleepScore
+            };
 
-        diaryMap[datumindex] = JSON.stringify(diary);
-        dataService.setDiaryMap(diaryMap);
-        console.log(diary);
-        location.href = "history.html";
+            diaryMap[datumindex] = JSON.stringify(diary);
+            dataService.setDiaryMap(diaryMap);
+            console.log(diary);
+            location.href = "history.html";
+        }
     };
 
 

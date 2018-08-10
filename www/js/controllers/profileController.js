@@ -69,8 +69,8 @@ angular.module('Chronic').controller('profileController', function($scope, dataS
         $scope.data.lunchTime = new Date($scope.dailyLife.lunchTime);
         $scope.data.dinnerTime = new Date($scope.dailyLife.dinnerTime);
         $scope.data.sportHours = new Date($scope.dailyLife.sportHours);
-        $scope.data.sleepHours = new Date($scope.dailyLife.sleepHours);
-        $scope.data.bedTime = new Date($scope.dailyLife.bedTime);
+        $scope.data.endSleep = new Date($scope.dailyLife.endSleep);
+        $scope.data.beginSleep = new Date($scope.dailyLife.beginSleep);
 
     };
     console.log($scope.user);
@@ -100,13 +100,13 @@ angular.module('Chronic').controller('profileController', function($scope, dataS
                     "patientID": $scope.user.patientID,
                     "city": $scope.dailyLife.city,
                     "sportHours": $scope.data.sportHours,
-                    "sleepHours": $scope.data.sleepHours,
-                    "bedTime": $scope.data.bedTime,
+                    "endSleep": $scope.data.endSleep,
+                    "beginSleep": $scope.data.beginSleep,
                     "alcohol": $scope.dailyLife.alcohol,
                     "tobacco": $scope.dailyLife.tobacco,
                     "cafeine": $scope.dailyLife.cafeine,
                     "breakfastTime": $scope.data.breakfastTime,
-                    "lunchtime": $scope.data.lunchTime,
+                    "lunchTime": $scope.data.lunchTime,
                     "dinnerTime": $scope.data.dinnerTime
                 };
                 $http.post('http://tw06v033.ugent.be/Chronic1/rest/PatientService/patients/update', JSON.stringify(user), {
@@ -147,16 +147,16 @@ angular.module('Chronic').controller('profileController', function($scope, dataS
                 "patientID": $scope.user.patientID,
                 "city": $scope.dailyLife.city,
                 "sportHours": $scope.data.sportHours,
-                "sleepHours": $scope.data.sleepHours,
-                "bedTime": $scope.data.bedTime,
+                "endSleep": $scope.data.endSleep,
+                "beginSleep": $scope.data.beginSleep,
                 "alcohol": $scope.dailyLife.alcohol,
                 "tobacco": $scope.dailyLife.tobacco,
                 "cafeine": $scope.dailyLife.cafeine,
                 "breakfastTime": $scope.data.breakfastTime,
-                "lunchtime": $scope.data.lunchTime,
+                "lunchTime": $scope.data.lunchTime,
                 "dinnerTime": $scope.data.dinnerTime
             };
-            dataService.setDailyLife(user.city,user.sportHours, user.sleepHours, user.bedTime, user.alcohol, user.tobacco, user.cafeine,user.breakfastTime, user.lunchtime, user.dinnerTime);
+            dataService.setDailyLife(user.city,user.sportHours, user.endSleep, user.beginSleep, user.alcohol, user.tobacco, user.cafeine,user.breakfastTime, user.lunchTime, user.dinnerTime);
             $http.post('http://tw06v033.ugent.be/Chronic1/rest/PatientService/patients/update', JSON.stringify(user), {
                 headers: {
                     'Content-Type': 'application/json',

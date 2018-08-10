@@ -60,6 +60,15 @@
             </div>
 
             <ons-row>
+                <p class="label list_header">Bezit u al een wearable?</p>
+            </ons-row>
+
+            <div class="form__field">
+                <label class="fontawesome-globe" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_wearable"> <span class="hidden">Wearable</span></label>
+                <input id="daily_wearable" ng-model="ownedWearable" type="text" class="form__input" placeholder="{{ownedWearable}}">
+            </div>
+
+            <ons-row>
                 <p class="label list_header">Om hoe laat eet u gewoonlijk?</p>
             </ons-row>
 
@@ -104,22 +113,21 @@
             <ons-row class="list_header">
                 <ons-col >Hoe veel porties van de volgende middelen gebruikt u wekelijks?</ons-col>
                 <ons-col width="50px" ng-click="showACTInfo()"><ons-icon width="50px" height="100px" icon="fa-question-circle"></ons-icon></ons-col>
-                <!--<p class="label list_header">Hoe veel porties van de volgende middelen gebruikt u wekelijks? <span class="fontawesome-question-sign"></p>-->
             </ons-row>
 
             <div class="form__field">
                 <label class="fontawesome-glass" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_alcohol"> <span class="hidden">Alcohol</span></label>
-                <input id="daily_alcohol" ng-model="alcohol" type="number" class="form__input" placeholder="{{alcohol}}" min="0" max="20">
+                <input id="daily_alcohol" ng-model="alcohol" type="number" class="form__input" placeholder="{{alcohol}}" min="0">
             </div>
 
             <div class="form__field">
                 <label class="fontawesome-coffee" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_cafeine"> <span class="hidden">Cafeine</span></label>
-                <input id="daily_cafeine" ng-model="cafeine" type="number" class="form__input" placeholder="{{cafeine}}" min="0" max="20">
+                <input id="daily_cafeine" ng-model="cafeine" type="number" class="form__input" placeholder="{{cafeine}}" min="0">
             </div>
 
             <div class="form__field">
                 <label class="fontawesome-fire" style="width: 110px; padding-left: 5px; padding-right: 0px;" for="daily_tobacco"> <span class="hidden">Tabak</span></label>
-                <input id="daily_tobacco" ng-model="tobacco" type="number" class="form__input" placeholder="{{tobacco}}" min="0" max="20">
+                <input id="daily_tobacco" ng-model="tobacco" type="number" class="form__input" placeholder="{{tobacco}}" min="0">
             </div>
 
             <ons-row ng-show="showMenstruation()">

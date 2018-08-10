@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" ng-app="Chronic">
+<head>
+    <meta charset="utf-8">
+
+    <title>Fitness Geschiedenis</title>
+
+    <!-- Our style sheet -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <script src="../cordova.js"></script>
+    <!-- AngularJS | MIT License | https://angularjs.org/ -->
+    <script src="../js/angular/angular.js"></script>
+    <script src="../js/angular/ngStorage.min.js"></script>
+
+    <!-- jQuery | MIT License | https://jquery.org/ -->
+    <script src="../js/vendor/jquery-2.1.4.js"></script>
+
+    <!-- onsenui v1.3.11 | Apache License | http://onsen.io/ -->
+    <script src="../js/vendor/onsenui.min.js"></script>
+    <script src='../lib/moment.min.js'></script>
+
+    <script src="../js/controllers/chronic.js"></script>
+    <script src="../js/services/backgroundservice.js"></script>
+    <script src="../js/services/dataservice.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/controllers/fitnessController.js"></script>
+    <script src="../js/vendor/Chart.min.js"></script>
+    <script src="../js/vendor/angular-chart.js"></script>
+    <script src="../js/cryptojs/SHA3.js"></script>
+
+    <link rel="stylesheet" href="../css/angular-chart.css">
+
+</head>
+
+<body ng-controller="fitnessController">
+<div id="loadingImg" style="display: block;">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+
+
+<ons-navigator var="fitnessNavigator">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><i class="fa fa-chevron-left"></i> </ons-toolbar-button></div>
+
+            <div class="center">
+                <ons-toolbar-button>
+                    <ons-icon icon="fa fa-angle-double-left" ng-click="goYesterday()"></ons-icon>
+                </ons-toolbar-button>
+                <div id="datum" class="label" style="width: 65%;text-align: center"></div>
+                <ons-toolbar-button>
+                    <ons-icon icon="fa fa-angle-double-right" ng-click="goTomorrow()"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+        </ons-toolbar>
+
+        <div>
+            <ons-row style="margin-top: 2%;">
+                <p class="label list_header">Het verloop van uw nacht:</p>
+                <div id="sleepmsg" style="margin-top: 8%;display: none">Geen slaapdata ontvangen</div>
+            </ons-row>
+            <!--<canvas id="line" class="chart chart-line" chart-data="data"-->
+                    <!--chart-labels="labels" chart-series="series" chart-options="options"-->
+                    <!--chart-dataset-override="datasetOverride" chart-click="onClick">-->
+            <!--</canvas>-->
+            <!--<canvas id="line-chart" width="800" height="450"></canvas>-->
+            <canvas style="position: relative;top: 0;left:0" id="line" class="chart chart-line" chart-data="data"
+                    chart-labels="labels" chart-click="onClick">
+            </canvas>
+            <ons-row style="margin-top: 6%;">
+                <p class="label list_header">Uw fysieke activiteiten van vandaag:</p>
+            </ons-row>
+            <div id="sportmsg" style="margin-top: 8%;display: none">Geen activiteiten ontvangen</div>
+            <div id="content">
+                <!--<ons-row style="margin-left: 2%; margin-top: 2%;">-->
+                    <!--<ons-col width="45%"><p class="label">Soort activiteit</p></ons-col>-->
+                    <!--<ons-col style="margin-right: 5%;"><p class="label">Duratie</p></ons-col>-->
+                <!--</ons-row>-->
+            </div>
+        </div>
+
+    </ons-page>
+</ons-navigator>
+
+</body>
+
+</html>

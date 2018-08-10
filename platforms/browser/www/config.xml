@@ -12,6 +12,5 @@
     <allow-navigation href="http://*/*" />
     <access origin="http://localhost/*" />
     <access origin="*" />
-    <preference name="phonegap-version" value="cli-7.1.0" />
     <preference name="orientation" value="portrait" />
 </widget>

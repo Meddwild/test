@@ -49,6 +49,8 @@ angular.module('Chronic').controller("historyController", function($scope, dataS
         $scope.listItems = [];
     }
 
+    $scope.diaryMap = dataService.getDiaryMap();
+
     $scope.loadEvents = function(){
         Array.prototype.push.apply($scope.listItems,dataService.getHeadacheList());
         Array.prototype.push.apply($scope.listItems, dataService.getMedicineList());
@@ -99,6 +101,21 @@ angular.module('Chronic').controller("historyController", function($scope, dataS
 
         document.getElementById('calendar').style.display = 'block';
         if(!$scope.listItems) { $('#loadingImg').hide(); return; }
+        for (var key in $scope.diaryMap) {
+            var today = new Date();
+            var _start = moment(key, "DD/MM/YYYY");
+            _start._tzm = today.getTimezoneOffset()/60;
+            var _end = _start;
+            $('#calendar').fullCalendar('renderEvent',
+                {
+                    title: "Dagboek ingevuld"
+                    , start: _start.format()
+                    , allDay: true
+                    , end: _end.format()
+                    , color: '#336d27'
+                    ,ignoreTimezone: false
+                }, true);
+        }
         for(i =0; i<$scope.listItems.length; i++){
             if($scope.listItems[i].hasOwnProperty("end")){
             	//console.log(moment.parseZone($scope.listItems[i].intensityValues[0].key));
@@ -198,13 +215,16 @@ angular.module('Chronic').controller("historyController", function($scope, dataS
             $scope.transition();
             location.href='detailedHeadache.html';
         }else{
-            if(obj.hasOwnProperty('title')){
-                dataService.setCurrentMedicine(obj.object);
-            }else{
-                dataService.setCurrentMedicine(obj);
+            if(obj.title != "Dagboek ingevuld") {
+                if(obj.hasOwnProperty('title')){
+                    dataService.setCurrentMedicine(obj.object);
+                }else{
+                    dataService.setCurrentMedicine(obj);
+                }
+                $scope.transition();
+                location.href = 'detailedMedicine.html';
             }
-            $scope.transition();
-            location.href = 'detailedMedicine.html';
+
         }
 
     };

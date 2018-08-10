@@ -85,7 +85,7 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
 
         window.plugins.googleplus.login(
             {
-                'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/fitness https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/fitness.activity.write https://www.googleapis.com/auth/fitness.body.read https://www.googleapis.com/auth/fitness.body.write https://www.googleapis.com/auth/fitness.location.read https://www.googleapis.com/auth/fitness.location.write https://www.googleapis.com/auth/fitness.nutrition.read https://www.googleapis.com/auth/fitness.nutrition.write',
+                'scopes': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/fitness.activity.write https://www.googleapis.com/auth/fitness.body.read https://www.googleapis.com/auth/fitness.body.write https://www.googleapis.com/auth/fitness.location.read https://www.googleapis.com/auth/fitness.location.write https://www.googleapis.com/auth/fitness.nutrition.read https://www.googleapis.com/auth/fitness.nutrition.write',
                 'webClientId': '175384751988-oh6m3dr3hg6i2ou68svi1rj7145lo4hf', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
                 'offline': true
             },
@@ -100,6 +100,7 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
                 $scope.handleUGentLogin();
             },
             function (msg) {
+                console.log("inloggen met Google mislukt " + msg);
                 $scope.email = dataService.getEmail();
                 $scope.handleUGentLogin();
             }
@@ -143,9 +144,11 @@ angular.module('Chronic').controller('loginController', function ($scope, dataSe
                 }
                 console.log(checkVersion());
                 if (VERSION_NUMBER != checkVersion()) {
-                    alert("Er is een nieuwe versie beschikbaar op https://build.phonegap.com/apps/1669916/builds");
+                    alert("Er is een nieuwe versie beschikbaar op https://build.phonegap.com/apps/2903198/builds");
                 }
             }, function (data, status, headers, config) {
+                // console.log(status);
+                // console.log(data)
                 alert("Er is een fout opgetreden... ");
             });
 

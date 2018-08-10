@@ -116,6 +116,16 @@
                         </div>
                     </ons-list-item>
 
+                    <!--Fitness-->
+                    <ons-list-item style="color: white" modifier="chevron" ng-click="myNavigator.pushPage('manualFitness.html')">
+                        <div style="width: 15%; float:left">
+                            <ons-icon  icon="fa fa-calendar-check-o" size="24px"></ons-icon>
+                        </div>
+                        <div style="width: 85%; float:left; font-size: 130%;">
+                            Fitness
+                        </div>
+                    </ons-list-item>
+
                     <!--Advies-->
                     <ons-list-item style="color: white" modifier="chevron" ng-click="myNavigator.pushPage('manualAdvies.html')">
                         <div style="width: 15%; float:left">
@@ -312,7 +322,7 @@
         </div>
 
         <div style="margin-left: 2%; margin-right: 2%;text-align: justify">
-            <p>De geschiedenis wordt steeds geopend in de kalendervorm. In deze kalender kunt u alle geregistreerde items bekijken in maand, week en dag formaat. De hoofdpijnen <i class="fa fa-user-md"></i> zijn in het <span class="headache">rood</span> gemarkeerd, terwijl de medicijnen <i class="fa fa-medkit"></i> in het <span class="medicine">groen</span> gemarkeerd zijn.</p>
+            <p>De geschiedenis wordt steeds geopend in de kalendervorm. In deze kalender kunt u alle geregistreerde items bekijken in maand, week en dag formaat. De hoofdpijnen <i class="fa fa-user-md"></i> zijn in het <span class="headache">rood</span> gemarkeerd, terwijl de medicijnen <i class="fa fa-medkit"></i> in het <span class="medicine">groen</span> gemarkeerd zijn. Indien u uw dagboek voor een dag hebt ingevuld wordt dit in het <span style="color: #336d27">donkergroen</span> weergegeven.</p>
             <br/>
             <p>U kunt bovenaan ook kiezen voor de lijstvorm <i class="fa fa-calendar"></i>. In de lijst kunt u alle geregistreerde hoofdpijnen en medicijnen zien.</p>
             <br/>
@@ -340,6 +350,30 @@
             <p>In het dagboek kunt u bijhouden welke activiteiten u die dag allemaal gedaan hebt.</p>
             <br/>
             <p>Voor de maaltijden kunt u ofwel een tijd ingeven, of u kan aanduiden dat u deze maaltijd oversgeslagen hebt door op het icoontje naast de tijd te klikken.</p>
+            <br/>
+            <p>Naarmate u meer dagboeken invult leert Chronicals sommige van uw dagelijkse gewoontes. Hierdoor worden de waarden in in het dagboek ingevuld door de door Chronicals voorspelde waarden, zodat het invullen van het dagboek een gemakkelijke en snelle dagelijkse gewoonte wordt.</p>
+        </div>
+    </ons-page>
+</script>
+
+<script type="text/ons-template" id="manualFitness.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left"><ons-toolbar-button ng-click="myNavigator.popPage()"><ons-icon icon="ion-ios-arrow-back" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="center" style="margin: 0 auto; text-align: center;"><ons-toolbar-button ng-click=";transition();" onclick="location.href='dashboard.html'"><ons-icon icon="ion-ios-home" style="font-size: 150%;"></ons-icon></ons-toolbar-button></div>
+            <div class="right"></div>
+        </ons-toolbar>
+        <div style="text-align: center; margin-top: 5%;">
+            <div><h2>Fitness</h2></div>
+            <hr>
+        </div>
+
+        <div style="margin-left: 2%; margin-right: 2%;text-align: justify">
+            <p>Wanneer u verbindt met een wearable zoals de Xiaomi Mi Band, kan Chronicals de slaap en sportdata die de wearable meet weergeven.</p>
+            <br/>
+            <p>De slaapdata wordt weergegeven in een grafiek. Hier kan u zien hoe goed uw slaapscore was doorheen de nacht, en wanneer u in diepe en lichte slaap was.</p>
+            <br/>
+            <p>Daaronder is de sportdata te zien. Chronicals geeft een lijst weer met alle sportactiveiten die ontvangen zijn van de wearable en Google Fit.</p>
         </div>
     </ons-page>
 </script>

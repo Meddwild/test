@@ -109,33 +109,53 @@
                 </div>
 
             </ons-row>
-            <ons-row class="row stretch">
 
-                <div class="tileContent tile large" style="width: 100%;" ng-click="transition();" onclick="location.href='history.html'">
-                    <i class="icon fa fa-history dashboardMidIcon"></i>
+            <ons-row class="row">
 
-                    <div id="midTile" style="width:100%;">
-                        <ons-list class="list dashboardlist" style="height: 90%;overflow: scroll;">
-                            <ons-list-item ng-repeat="obj in listItems" class="list__item headache">
-                                <span class="list__item__line-height">
-                                    <div class="list-left">
-                                        <i ng-class="{'fa fa-user-md': obj.hasOwnProperty('end'), 'fa fa-medkit medicine': !obj.hasOwnProperty('end')}">     </i>
-                                    </div>
-                                    <div class="list-center" ng-class="{'medicine': !obj.hasOwnProperty('end')}">
-                                        {{obj.hasOwnProperty('end')? getTimeDateString(obj.intensityValues[0].key) : getTimeDateString(obj.date)}}
-                                    </div>
-                                    <div class="list-right"  ng-class="{'medicine': !obj.hasOwnProperty('end')}">
-                                        {{obj.hasOwnProperty('end') ? obj.intensityValues[0].value+"/10" : '&#160;'}}
+                <div class="tileContent tile half" ng-click="transition()" onclick="location.href='fitness.html'">
+                    <div class="tileContentInner">
+                        <i class="icon fa fa-line-chart"></i>
 
-                                        <!--8/10-->
-                                    </div>
-                                </span>
-                            </ons-list-item>
-                        </ons-list>
+                        <p>Fitness</p>
+                    </div>
+                </div>
+
+                <div class="tileContent tile half last" ng-click="transition();" onclick="location.href='history.html'">
+                    <div class="tileContentInner">
+                        <i class="icon fa fa-history"></i>
+
+                        <p>Geschiedenis</p>
                     </div>
                 </div>
 
             </ons-row>
+            <!--<ons-row class="row stretch">-->
+
+            <!--<div class="tileContent tile large" style="width: 100%;" ng-click="transition();" onclick="location.href='history.html'">-->
+            <!--<i class="icon fa fa-history dashboardMidIcon"></i>-->
+
+            <!--<div id="midTile" style="width:100%;">-->
+            <!--<ons-list class="list dashboardlist" style="height: 90%;overflow: scroll;">-->
+            <!--<ons-list-item ng-repeat="obj in listItems" class="list__item headache">-->
+            <!--<span class="list__item__line-height">-->
+            <!--<div class="list-left">-->
+            <!--<i ng-class="{'fa fa-user-md': obj.hasOwnProperty('end'), 'fa fa-medkit medicine': !obj.hasOwnProperty('end')}">     </i>-->
+            <!--</div>-->
+            <!--<div class="list-center" ng-class="{'medicine': !obj.hasOwnProperty('end')}">-->
+            <!--{{obj.hasOwnProperty('end')? getTimeDateString(obj.intensityValues[0].key) : getTimeDateString(obj.date)}}-->
+            <!--</div>-->
+            <!--<div class="list-right"  ng-class="{'medicine': !obj.hasOwnProperty('end')}">-->
+            <!--{{obj.hasOwnProperty('end') ? obj.intensityValues[0].value+"/10" : '&#160;'}}-->
+
+            <!--&lt;!&ndash;8/10&ndash;&gt;-->
+            <!--</div>-->
+            <!--</span>-->
+            <!--</ons-list-item>-->
+            <!--</ons-list>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--</ons-row>-->
             <ons-row class="row">
                 <div class="tileContent tile half">
                     <div class="tileContentInner" ng-click="transition();" onclick="location.href='advice.html'">
@@ -163,7 +183,7 @@
 
         <ons-list style="background-color: #1a252f;" >
             <!--<ons-list-item class="listitem"  ng-click="closeListItem()"  onclick="location.reload()" modifier="tappable" style="border-bottom: 1px solid #FFFFFF;">-->
-                <!--Sluit hoofdpijn af (eind = nu)-->
+            <!--Sluit hoofdpijn af (eind = nu)-->
             <!--</ons-list-item>-->
             <ons-list-item ng-click="addDetailsListItem()" onclick="location.href='headache.html'" class="listitem" modifier="tappable" style="border-bottom: 1px solid #FFFFFF;">
                 Intensiteit hoofdpijn toevoegen
@@ -172,7 +192,7 @@
             <ons-list-item style="display: none;"></ons-list-item><ons-list-item style="display: none;"></ons-list-item>
 
             <!--<ons-list-item ng-click="deleteListItem()" onclick="location.reload()" class="listitem" modifier="tappable">-->
-                <!--Hoofdpijn verwijderen-->
+            <!--Hoofdpijn verwijderen-->
             <!--</ons-list-item>-->
         </ons-list>
 
